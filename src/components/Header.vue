@@ -25,11 +25,21 @@
         lg:flex lg:px-16 lg:-mx-4 lg:flex-row lg:items-center"
              :class="{ 'hidden': !isOpen, 'flex': isOpen}"
         >
-          <a href="#" class="px-2 lg:py-4 mt-2 lg:mt-0 lg:mx-4 transition-colors duration-200 transform hover:bg-gray-300 hover:bg-opacity-30 ">Resume</a>
-          <a href="#" class="px-2 lg:py-4 mt-2 lg:mt-0 lg:mx-4 transition-colors duration-200 transform hover:bg-gray-300 hover:bg-opacity-30">About Me</a>
-          <a href="#" class="px-2 lg:py-4 mt-2 lg:mt-0 lg:mx-4 transition-colors duration-200 transform hover:bg-gray-300 hover:bg-opacity-30">Portfolio</a>
-          <a href="#" class="px-2 lg:py-4 mt-2 lg:mt-0 lg:mx-4 transition-colors duration-200 transform hover:bg-gray-300 hover:bg-opacity-30">Blog</a>
-          <a href="#" class="px-2 lg:py-4 mt-2 lg:mt-0 lg:mx-4 transition-colors duration-200 transform hover:bg-gray-300 hover:bg-opacity-30">Contact</a>
+          <div :class="navBgStyle">
+            <router-link to="/resume" :class="navItemStyle">Resume</router-link>
+          </div>
+          <div :class="navBgStyle">
+            <router-link to="/about" :class="navItemStyle">About Me</router-link>
+          </div>
+          <div :class="navBgStyle">
+            <router-link to="/portfolio" :class="navItemStyle">Portfolio</router-link>
+          </div>
+          <div :class="navBgStyle">
+            <router-link to="/blog" :class="navItemStyle">Blog</router-link>
+          </div>
+          <div :class="navBgStyle">
+            <router-link to="/contact" :class="navItemStyle">Contact</router-link>
+          </div>
 
         </div>
       </div>
@@ -76,6 +86,8 @@ export default {
   data() {
     return {
       isOpen: false,
+      navItemStyle: "mt-2 lg:mt-0 lg:mx-4",
+      navBgStyle: "flex-auto px-2 lg:py-4 transition-colors duration-500 transform hover:bg-gray-300 hover:bg-opacity-30"
     }
   },
 };

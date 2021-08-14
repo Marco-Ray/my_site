@@ -1,15 +1,17 @@
 <template>
-  <div class="home">
-    Hello
-  </div>
+  <app-header />
+  <app-content />
 </template>
 
 <script>
 // @ is an alias to /src
+import AppHeader from '@/components/Header.vue';
+import AppContent from '@/components/Content.vue';
 
 export default {
   name: 'Home',
   components: {
+    AppHeader, AppContent,
   },
 };
 </script>
