@@ -1,18 +1,16 @@
 <template>
-  <nav class="bg-white shadow dark:bg-gray-800">
+  <nav id="nav" class="bg-black fixed w-full shadow lg:bg-transparent">
     <div class="container px-6 py-4 mx-auto lg:flex lg:justify-between lg:items-center">
       <div class="lg:flex lg:items-center">
         <div class="flex items-center justify-between">
           <div>
-            <a class="text-2xl font-bold text-gray-800 dark:text-white
-            lg:text-3xl hover:text-gray-700 dark:hover:text-gray-300" href="#">Brand</a>
+            <a class="text-2xl font-bold text-white
+            lg:text-3xl" href="#">Zehuan Wang</a>
           </div>
 
           <!-- Mobile menu button -->
           <div class="flex lg:hidden">
-            <button type="button" class="text-gray-500 dark:text-gray-200 hover:text-gray-600
-            dark:hover:text-gray-400focus:outline-none focus:text-gray-600
-            dark:focus:text-gray-400" aria-label="toggle menu">
+            <button type="button" class="text-white focus:text-gray-600" aria-label="toggle menu">
               <svg viewBox="0 0 24 24" class="w-6 h-6 fill-current">
                 <path fill-rule="evenodd"
                       d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0
@@ -23,34 +21,14 @@
           </div>
         </div>
 
-        <div class="flex flex-col text-gray-600 capitalize
-        dark:text-gray-300 lg:flex lg:px-16 lg:-mx-4 lg:flex-row lg:items-center">
-          <a href="#" class="mt-2 lg:mt-0 lg:mx-4 hover:text-gray-800
-          dark:hover:text-gray-200">features</a>
-          <a href="#" class="mt-2 lg:mt-0 lg:mx-4 hover:text-gray-800
-          dark:hover:text-gray-200">downloads</a>
-          <a href="#" class="mt-2 lg:mt-0 lg:mx-4 hover:text-gray-800
-          dark:hover:text-gray-200">docs</a>
-          <a href="#" class="mt-2 lg:mt-0 lg:mx-4 hover:text-gray-800
-          dark:hover:text-gray-200">support</a>
-          <a href="#" class="mt-2 lg:mt-0 lg:mx-4 hover:text-gray-800
-          dark:hover:text-gray-200">blog</a>
+        <div class="flex flex-col text-white capitalize
+        lg:flex lg:px-16 lg:-mx-4 lg:flex-row lg:items-center">
+          <a href="#" class="px-2 lg:py-4 mt-2 lg:mt-0 lg:mx-4 transition-colors duration-200 transform hover:bg-gray-300 hover:bg-opacity-30 ">Resume</a>
+          <a href="#" class="px-2 lg:py-4 mt-2 lg:mt-0 lg:mx-4 transition-colors duration-200 transform hover:bg-gray-300 hover:bg-opacity-30 hover:text-red-500">About Me</a>
+          <a href="#" class="px-2 lg:py-4 mt-2 lg:mt-0 lg:mx-4 transition-colors duration-200 transform hover:bg-gray-300 hover:bg-opacity-30 hover:text-red-500">Portfolio</a>
+          <a href="#" class="px-2 lg:py-4 mt-2 lg:mt-0 lg:mx-4 transition-colors duration-200 transform hover:bg-gray-300 hover:bg-opacity-30 hover:text-red-500">Blog</a>
+          <a href="#" class="px-2 lg:py-4 mt-2 lg:mt-0 lg:mx-4 transition-colors duration-200 transform hover:bg-gray-300 hover:bg-opacity-30 hover:text-red-500">Contact</a>
 
-          <div class="relative mt-4 lg:mt-0 lg:mx-4">
-                        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                            <svg class="w-4 h-4 text-gray-600 dark:text-gray-300"
-                                 viewBox="0 0 24 24" fill="none">
-                                <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
-                                  stroke="currentColor" stroke-linecap="round"
-                                  stroke-linejoin="round" stroke-width="2">
-                                </path>
-                            </svg>
-                        </span>
-
-            <input type="text"
-                   class="w-full py-1 pl-10 pr-4 text-gray-700 placeholder-gray-600 bg-white border-b border-gray-600 dark:placeholder-gray-300 dark:focus:border-gray-300 lg:w-56 lg:border-transparent dark:bg-gray-800 dark:text-gray-300 focus:outline-none focus:border-gray-600"
-                   placeholder="Search">
-          </div>
         </div>
       </div>
 
@@ -97,6 +75,5 @@ export default {
 };
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
 </style>
