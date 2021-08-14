@@ -2133,6 +2133,11 @@ amdefine@>=0.0.4:
   resolved "https://registry.nlark.com/amdefine/download/amdefine-1.0.1.tgz?cache=0&sync_timestamp=1621222695118&other_urls=https%3A%2F%2Fregistry.nlark.com%2Famdefine%2Fdownload%2Famdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
   integrity sha1-SlKCrBZHKek2Gbz9OtFR+BfOkfU=
 
+animate.css@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.nlark.com/animate.css/download/animate.css-4.1.1.tgz#614ec5a81131d7e4dc362a58143f7406abd68075"
+  integrity sha1-YU7FqBEx1+TcNipYFD90BqvWgHU=
+
 ansi-colors@^3.0.0:
   version "3.2.4"
   resolved "https://registry.nlark.com/ansi-colors/download/ansi-colors-3.2.4.tgz#e3a3da4bfbae6c86a9c285625de124a234026fbf"

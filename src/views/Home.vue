@@ -1,6 +1,8 @@
 <template>
-  <app-header />
-  <app-content />
+  <div>
+    <app-header />
+    <app-content />
+  </div>
 </template>
 
 <script>
