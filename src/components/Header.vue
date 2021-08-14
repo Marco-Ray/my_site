@@ -10,7 +10,7 @@
 
           <!-- Mobile menu button -->
           <div class="flex lg:hidden">
-            <button type="button" class="text-white focus:text-gray-600" aria-label="toggle menu">
+            <button type="button" class="text-white focus:text-gray-600" aria-label="toggle menu" @click.prevent="isOpen = !isOpen">
               <svg viewBox="0 0 24 24" class="w-6 h-6 fill-current">
                 <path fill-rule="evenodd"
                       d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0
@@ -21,13 +21,15 @@
           </div>
         </div>
 
-        <div class="flex flex-col text-white capitalize
-        lg:flex lg:px-16 lg:-mx-4 lg:flex-row lg:items-center">
+        <div class="flex-col text-white capitalize
+        lg:flex lg:px-16 lg:-mx-4 lg:flex-row lg:items-center"
+             :class="{ 'hidden': !isOpen, 'flex': isOpen}"
+        >
           <a href="#" class="px-2 lg:py-4 mt-2 lg:mt-0 lg:mx-4 transition-colors duration-200 transform hover:bg-gray-300 hover:bg-opacity-30 ">Resume</a>
-          <a href="#" class="px-2 lg:py-4 mt-2 lg:mt-0 lg:mx-4 transition-colors duration-200 transform hover:bg-gray-300 hover:bg-opacity-30 hover:text-red-500">About Me</a>
-          <a href="#" class="px-2 lg:py-4 mt-2 lg:mt-0 lg:mx-4 transition-colors duration-200 transform hover:bg-gray-300 hover:bg-opacity-30 hover:text-red-500">Portfolio</a>
-          <a href="#" class="px-2 lg:py-4 mt-2 lg:mt-0 lg:mx-4 transition-colors duration-200 transform hover:bg-gray-300 hover:bg-opacity-30 hover:text-red-500">Blog</a>
-          <a href="#" class="px-2 lg:py-4 mt-2 lg:mt-0 lg:mx-4 transition-colors duration-200 transform hover:bg-gray-300 hover:bg-opacity-30 hover:text-red-500">Contact</a>
+          <a href="#" class="px-2 lg:py-4 mt-2 lg:mt-0 lg:mx-4 transition-colors duration-200 transform hover:bg-gray-300 hover:bg-opacity-30">About Me</a>
+          <a href="#" class="px-2 lg:py-4 mt-2 lg:mt-0 lg:mx-4 transition-colors duration-200 transform hover:bg-gray-300 hover:bg-opacity-30">Portfolio</a>
+          <a href="#" class="px-2 lg:py-4 mt-2 lg:mt-0 lg:mx-4 transition-colors duration-200 transform hover:bg-gray-300 hover:bg-opacity-30">Blog</a>
+          <a href="#" class="px-2 lg:py-4 mt-2 lg:mt-0 lg:mx-4 transition-colors duration-200 transform hover:bg-gray-300 hover:bg-opacity-30">Contact</a>
 
         </div>
       </div>
@@ -69,9 +71,13 @@
 </template>
 
 <script>
-/* eslint-disable */
 export default {
   name: 'Header',
+  data() {
+    return {
+      isOpen: false,
+    }
+  },
 };
 </script>
 
