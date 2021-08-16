@@ -4,15 +4,18 @@
       :enter-active-class="route.meta.enter"
       :leave-active-class="route.meta.leave"
       mode="out-in">
-      <component :is="Component" />
+      <component :is="Component" class="w-full h-full z-20"/>
     </transition>
   </router-view>
+
 </template>
 
 <script>
 
 export default {
   name: 'app',
+  components: {
+  }
 };
 </script>
 

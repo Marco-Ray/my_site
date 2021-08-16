@@ -1,6 +1,6 @@
 <template>
-  <nav id="nav" class="bg-black fixed w-full shadow lg:bg-transparent">
-    <div class="container px-6 py-4 mx-auto lg:flex lg:justify-between lg:items-center">
+  <nav id="nav" class="bg-black relative lg:fixed w-full shadow lg:bg-transparent">
+    <div class="container pt-10 mx-auto lg:flex lg:justify-between lg:items-center">
       <div class="lg:flex lg:items-center">
         <div class="flex items-center justify-between">
           <div>
@@ -21,8 +21,8 @@
           </div>
         </div>
 
-        <div class="flex-col text-white capitalize
-        lg:flex lg:px-16 lg:-mx-4 lg:flex-row lg:items-center"
+        <div class="flex-col text-white capitalize pt-10 divide-solid divide-y divide-white divide-opacity-20
+        lg:flex lg:px-24 lg:-mx-4 lg:gap-0 lg:pt-0 lg:flex-row lg:items-center lg:divide-none"
              :class="{ 'hidden': !isOpen, 'flex': isOpen}"
         >
           <div :class="navBgStyle">
@@ -87,7 +87,7 @@ export default {
     return {
       isOpen: false,
       navItemStyle: "mt-2 lg:mt-0 lg:mx-4",
-      navBgStyle: "flex-auto px-2 lg:py-4 transition-colors duration-500 transform hover:bg-gray-300 hover:bg-opacity-30"
+      navBgStyle: "flex-auto px-2 py-2 rounded-sm lg:py-4 transition-colors duration-500 transform hover:bg-gray-300 hover:bg-opacity-30"
     }
   },
 };

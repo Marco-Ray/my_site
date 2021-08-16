@@ -11,10 +11,9 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
-    // meta: { transition: 'right-slide' },
     meta: {
-      enter: 'animate__animated animate__slideInLeft ',
-      leave: 'animate__animated animate__slideOutRight',
+      enter: 'animate__animated animate__fadeIn ',
+      leave: 'animate__animated animate__fadeOut',
     },
   },
   {
@@ -24,10 +23,9 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: About,
-    // meta: { transition: 'left-slide' },
     meta: {
-      enter: 'animate__animated animate__slideInRight',
-      leave: 'animate__animated animate__slideOutLeft',
+      enter: 'animate__animated animate__fadeIn ',
+      leave: 'animate__animated animate__fadeOut',
     },
   },
   {
@@ -36,8 +34,8 @@ const routes = [
     component: Resume,
     // meta: { transition: 'left-slide' },
     meta: {
-      enter: 'animate__animated animate__slideInRight',
-      leave: 'animate__animated animate__slideOutLeft',
+      enter: 'animate__animated animate__fadeIn ',
+      leave: 'animate__animated animate__fadeOut',
     },
   },
   {
@@ -46,8 +44,8 @@ const routes = [
     component: Portfolio,
     // meta: { transition: 'left-slide' },
     meta: {
-      enter: 'animate__animated animate__slideInRight',
-      leave: 'animate__animated animate__slideOutLeft',
+      enter: 'animate__animated animate__fadeIn ',
+      leave: 'animate__animated animate__fadeOut',
     },
   },
   {
@@ -56,8 +54,8 @@ const routes = [
     component: Blog,
     // meta: { transition: 'left-slide' },
     meta: {
-      enter: 'animate__animated animate__slideInRight',
-      leave: 'animate__animated animate__slideOutLeft',
+      enter: 'animate__animated animate__fadeIn ',
+      leave: 'animate__animated animate__fadeOut',
     },
   },
   {
@@ -66,8 +64,8 @@ const routes = [
     component: Contact,
     // meta: { transition: 'left-slide' },
     meta: {
-      enter: 'animate__animated animate__slideInRight',
-      leave: 'animate__animated animate__slideOutLeft',
+      enter: 'animate__animated animate__fadeIn ',
+      leave: 'animate__animated animate__fadeOut',
     },
   },
   {
