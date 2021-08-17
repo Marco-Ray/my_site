@@ -1,18 +1,30 @@
 <template>
-  <v-md-preview :text="markdown"></v-md-preview>
+  <v-md-preview :text="temp"></v-md-preview>
 </template>
 
 <script>
+import marked from 'marked';
+
 export default {
   name: 'MarkDownPage',
   data() {
     return {
-      markdown: '# 标题'
+      temp: ''
     }
+  },
+  methods: {
+    transform() {
+      this.axios.get("./md_files/DCGAN.md").then((res) => {
+        this.temp = res.data;
+      });
+    },
+  },
+  mounted() {
+    this.transform()
   }
 };
 </script>
 
 <style scoped>
-
+@import "../assets/mystyle.css";
 </style>
