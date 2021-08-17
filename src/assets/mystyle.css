@@ -367,7 +367,7 @@
 }
 
 .vuepress-markdown-body:not(.custom){
-    padding:2rem 2.5rem
+    padding:2rem 5.5rem
 }
 
 @media (max-width:959px){

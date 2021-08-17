@@ -3,10 +3,12 @@
     <router-link to="/">
       <i class="fa fa-times absolute right-5" />
     </router-link>
-    <i v-show="!isTop"
-      class="fa fa-arrow-up fixed bottom-5 right-5 z-10 cursor-pointer"
-      @click.prevent="backToTop"
-    />
+    <div id="btt" class="fixed w-full bottom-5 right-5 z-10 cursor-pointer flex justify-end">
+      <i v-show="!isTop"
+        class="fa fa-arrow-up"
+        @click.prevent="backToTop"
+      />
+    </div>
     <mark-down-page></mark-down-page>
   </div>
 </template>
@@ -27,7 +29,10 @@ export default {
       this.isTop = scrollTop === 0;
     },
     backToTop() {
-      document.documentElement.scrollTop = 0;
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
     }
   },
   created() {
@@ -40,4 +45,12 @@ export default {
 </script>
 
 <style scoped>
+@media (max-width:959px){
+  #btt {
+    bottom: 0px;
+    right: 0px;
+    background-color: black;
+    justify-content: center;
+  }
+}
 </style>
