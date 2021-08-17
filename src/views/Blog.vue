@@ -1,5 +1,5 @@
 <template>
-  <div class="blog bg-black h-screen text-white text-7xl">
+  <div class="blog h-screen text-white text-7xl">
     <router-link to="/">
       <i class="fa fa-times absolute right-0"></i>
     </router-link>
@@ -16,4 +16,7 @@ export default {
 </script>
 
 <style scoped>
+div {
+  color: red
+}
 </style>

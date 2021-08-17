@@ -23,8 +23,10 @@ GAN 是一个框架，用于教授 DL 模型捕获训练数据的分布，以便
 )。从论文来看，GAN 损失函数为
 
 <img src="https://www.zhihu.com/equation?tex=
-{\underset {G}min}{\underset {D}max}V(D,G)=E_{x \sim p_{data}(x)}[logD(x)]+E_{z \sim p_g(z)}[log(1-D(G(z)))]" alt="
-{\underset {G}min}{\underset {D}max}V(D,G)=E_{x \sim p_{data}(x)}[logD(x)]+E_{z \sim p_g(z)}[log(1-D(G(z)))]" class="ee_img tr_noresize" eeimg="1">
+{\underset {G}min}{\underset {D}max}V(D,G)=E_{x \sim p_{data}(x)}[logD(x)]+E_{z \sim p_g(z)}[log(1-D(G(z)))]
+" alt="
+{\underset {G}min}{\underset {D}max}V(D,G)=E_{x \sim p_{data}(x)}[logD(x)]+E_{z \sim p_g(z)}[log(1-D(G(z)))]
+" class="ee_img tr_noresize" eeimg="1">
 
 理论上，这个极大极小博弈的解决方案是 
 <img src="https://www.zhihu.com/equation?tex=p_g=p_{data}" alt="p_g=p_{data}" class="ee_img tr_noresize" eeimg="1">
@@ -191,9 +193,7 @@ plt.imshow(np.transpose(vutils.make_grid(real_batch[0].to(device)[:64], padding=
 #### 权重初始化
 
 从 DCGAN 论文中，作者指定所有模型权重都应从 
-<img src="https://www.zhihu.com/equation?tex=mean=0" alt="mean=0" class="ee_img tr_noresize" eeimg="1">
-、
-<img src="https://www.zhihu.com/equation?tex=stdev=0.02" alt="stdev=0.02" class="ee_img tr_noresize" eeimg="1">
+<img src="https://www.zhihu.com/equation?tex=mean=0" alt="mean=0" class="ee_img tr_noresize" eeimg="1"><img src="https://www.zhihu.com/equation?tex=stdev=0.02" alt="stdev=0.02" class="ee_img tr_noresize" eeimg="1">
  的正态分布随机初始化。 weights_init 函数将初始化的模型作为输入，并重新初始化所有卷积、卷积转置和批量归一化层以满足此标准。此函数在初始化后立即应用于模型。
 
 ```python
@@ -271,7 +271,7 @@ print(netG)
 
 Out：
 
->```
+
 >Generator(
 >  (main): Sequential(
 >    (0): ConvTranspose2d(100, 512, kernel_size=(4, 4), stride=(1, 1), bias=False)
@@ -289,7 +289,7 @@ Out：
 >    (12): ConvTranspose2d(64, 3, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), bias=False)
 >    (13): Tanh()
 >  )
->```
+
 
 #### Discriminator
 
@@ -370,14 +370,13 @@ Out：
 通过对 D 和 G 的设置，我们可以指定它们如何通过损失函数和优化器进行学习。我们将使用 PyTorch 中定义的二元交叉熵损失 ([BCELoss](https://pytorch.org/docs/stable/nn.html#torch.nn.BCELoss)) 函数：
 
 <img src="https://www.zhihu.com/equation?tex=
-l(x,y)=L=\{l_1,...,l_N\}^T,l_n=-[y_n \cdot logx_n + (1-y_n) \cdot log(1-x_n)]" alt="
-l(x,y)=L=\{l_1,...,l_N\}^T,l_n=-[y_n \cdot logx_n + (1-y_n) \cdot log(1-x_n)]" class="ee_img tr_noresize" eeimg="1">
+l(x,y)=L=\{l_1,...,l_N\}^T,l_n=-[y_n \cdot logx_n + (1-y_n) \cdot log(1-x_n)]
+" alt="
+l(x,y)=L=\{l_1,...,l_N\}^T,l_n=-[y_n \cdot logx_n + (1-y_n) \cdot log(1-x_n)]
+" class="ee_img tr_noresize" eeimg="1">
 
 请注意此函数如何提供目标函数中的两个对数分量的计算（即 
-<img src="https://www.zhihu.com/equation?tex=log(D(x)" alt="log(D(x)" class="ee_img tr_noresize" eeimg="1">
-) 和 
-<img src="https://www.zhihu.com/equation?tex=log(1-D(G(z)))" alt="log(1-D(G(z)))" class="ee_img tr_noresize" eeimg="1">
-)。我们可以指定 BCE 方程的哪一部分与 y 输入一起使用。这是在即将推出的训练循环中完成的，但重要的是要了解我们如何仅通过更改 y（即 GT 标签）来选择我们希望计算的组件。
+<img src="https://www.zhihu.com/equation?tex=log(D(x)" alt="log(D(x)" class="ee_img tr_noresize" eeimg="1">和 <img src="https://www.zhihu.com/equation?tex=log(1-D(G(z)))" alt="log(1-D(G(z)))" class="ee_img tr_noresize" eeimg="1">)。我们可以指定 BCE 方程的哪一部分与 y 输入一起使用。这是在即将推出的训练循环中完成的，但重要的是要了解我们如何仅通过更改 y（即 GT 标签）来选择我们希望计算的组件。
 
 接下来，我们将真实标签定义为 1，将假标签定义为 0。这些标签将在计算 D 和 G 的损失时使用，这也是原始 GAN 论文中使用的约定。最后，我们设置了两个单独的优化器，一个用于 D，一个用于 G。如 DCGAN 论文中所述，两者都是 Adam 优化器，学习率为 0.0002，Beta1 = 0.5。为了跟踪生成器的学习进程，我们将生成一组**固定的潜在向量**（即 fixed_noise)（见[Import](#Import)部分，固定了随机种子，因此每次生成的随机向量都是固定的），这些向量是从高斯分布中提取的。在训练循环中，我们会周期性地将这个 fixed_noise 输入到 G 中，在迭代过程中，我们将看到从噪声中形成的图像。
 
@@ -525,7 +524,7 @@ for epoch in range(num_epochs):
 
 Out:
 
->```python
+
 >Starting Training Loop...
 >[0/5][0/1583]   Loss_D: 1.9847  Loss_G: 5.5914  D(x): 0.6004    D(G(z)): 0.6680 / 0.0062
 >[0/5][50/1583]  Loss_D: 0.1806  Loss_G: 12.1108 D(x): 0.9140    D(G(z)): 0.0000 / 0.0000
@@ -548,7 +547,6 @@ Out:
 >[0/5][900/1583] Loss_D: 1.5095  Loss_G: 1.8737  D(x): 0.3548    D(G(z)): 0.0082 / 0.2237
 >[0/5][950/1583] Loss_D: 0.6173  Loss_G: 4.5841  D(x): 0.7906    D(G(z)): 0.2451 / 0.0188
 >......
->```
 
 ## Results
 
@@ -576,7 +574,7 @@ plt.show()
 记住我们如何在每个训练时期之后将生成器的输出保存在 fixed_noise 批次上。现在，我们可以用动画可视化 G 的训练进程。按播放按钮开始动画。
 
 ```python
-#%%capture
+###capture
 fig = plt.figure(figsize=(8,8))
 plt.axis("off")
 ims = [[plt.imshow(np.transpose(i,(1,2,0)), animated=True)] for i in img_list]
