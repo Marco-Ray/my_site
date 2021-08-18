@@ -1,6 +1,7 @@
 <template>
-  <nav id="nav" class="bg-black relative lg:fixed w-full shadow lg:bg-transparent">
-    <div class="container pt-10 mx-auto lg:flex lg:justify-between lg:items-center">
+  <transition class="animate__animated animate__fadeIn">
+    <nav id="nav" class="bg-black relative lg:fixed w-full shadow-lg lg:bg-transparent">
+    <div class="container pt-8 pb-2 mx-auto lg:flex lg:justify-between lg:items-center">
         <div class="lg:flex lg:items-center">
           <div class="flex items-center justify-between">
             <div id="logo"
@@ -26,26 +27,16 @@
           lg:flex lg:px-24 lg:-mx-4 lg:gap-0 lg:pt-0 lg:flex-row lg:items-center lg:divide-none"
                :class="{ 'hidden': !isOpen, 'flex': isOpen}"
           >
-            <div :class="navBgStyle">
-              <router-link to="/resume" :class="navItemStyle">Resume</router-link>
-            </div>
-            <div :class="navBgStyle">
-              <router-link to="/about" :class="navItemStyle">About Me</router-link>
-            </div>
-            <div :class="navBgStyle">
-              <router-link to="/portfolio" :class="navItemStyle">Portfolio</router-link>
-            </div>
-            <div :class="navBgStyle">
-              <router-link to="/blog" :class="navItemStyle">Blog</router-link>
-            </div>
-            <div :class="navBgStyle">
-              <router-link to="/contact" :class="navItemStyle">Contact</router-link>
-            </div>
+            <router-link to="/resume" :class="navItemStyle">Resume</router-link>
+            <router-link to="/about" :class="navItemStyle">About Me</router-link>
+            <router-link to="/portfolio" :class="navItemStyle">Portfolio</router-link>
+            <router-link to="/blogs" :class="navItemStyle">Blog</router-link>
+            <router-link to="/contact" :class="navItemStyle">Contact</router-link>
 
           </div>
         </div>
 
-        <div class="flex justify-center mt-3 pb-1 lg:flex lg:mt-0 transform hover:cursor-pointer">
+        <div class="flex justify-center mt-3 pb-1 lg:pb-0 lg:flex lg:mt-0 transform hover:cursor-pointer">
           <a href="#" class="mx-2 text-gray-600 dark:text-gray-300
           hover:text-gray-500 dark:hover:text-gray-300" aria-label="Reddit">
             <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" fill="none"
@@ -55,6 +46,8 @@
               </path>
             </svg>
           </a>
+
+
 
           <a href="#" class="mx-2 text-gray-600
           dark:text-gray-300 hover:text-gray-500 dark:hover:text-gray-300"
@@ -67,7 +60,7 @@
             </svg>
           </a>
 
-          <a href="#" class="mx-2 text-gray-600 dark:text-gray-300
+          <a href="https://github.com/Marco-Ray" target="_blank" class="mx-2 text-gray-600 dark:text-gray-300
           hover:text-gray-500 dark:hover:text-gray-300" aria-label="Github">
             <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" fill="none"
                  xmlns="http://www.w3.org/2000/svg">
@@ -79,6 +72,7 @@
         </div>
       </div>
   </nav>
+  </transition>
 </template>
 
 <script>
@@ -87,13 +81,16 @@ export default {
   data() {
     return {
       isOpen: false,
-      navItemStyle: "mt-2 lg:mt-0 lg:mx-3",
-      navBgStyle: "flex-auto px-2 py-2 rounded-sm lg:py-4 " +
-        "transition-colors duration-500 transform hover:bg-gray-300 hover:bg-opacity-30 hover:cursor-pointer"
+      navItemStyle: "mt-2 lg:mt-0 lg:mx-3 flex-auto px-2 py-2 rounded-sm lg:py-4 " +
+        "transition-colors duration-500 transform hover:bg-gray-300 hover:bg-opacity-30 hover:cursor-pointer",
     }
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.linkedIn {
+  width: 24px;
+  height: 24px;
+}
 </style>

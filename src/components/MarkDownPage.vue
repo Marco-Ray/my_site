@@ -12,9 +12,10 @@ export default {
       temp: ''
     }
   },
+  props: ['file_path'],
   methods: {
     transform() {
-      this.axios.get("./md_files/DCGAN.md").then((res) => {
+      this.axios.get(this.file_path).then((res) => {
         this.temp = res.data;
       });
     },

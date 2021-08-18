@@ -3,7 +3,8 @@ import Home from '../views/Home.vue';
 import About from '../views/About.vue';
 import Resume from '../views/Resume.vue';
 import Portfolio from '../views/Portfolio.vue';
-import Blog from '../views/Blog.vue';
+import BlogPost from '../views/BlogPost.vue';
+import Blogs from '../views/Blogs';
 import Contact from '../views/Contact.vue';
 
 const routes = [
@@ -49,9 +50,19 @@ const routes = [
     },
   },
   {
-    path: '/blog',
-    name: 'Blog',
-    component: Blog,
+    path: '/blogs',
+    name: 'Blogs',
+    component: Blogs,
+    // meta: { transition: 'left-slide' },
+    meta: {
+      enter: 'animate__animated animate__fadeIn ',
+      leave: 'animate__animated animate__fadeOut',
+    },
+  },
+  {
+    path: '/blogs/:title',
+    name: 'BlogPost',
+    component: BlogPost,
     // meta: { transition: 'left-slide' },
     meta: {
       enter: 'animate__animated animate__fadeIn ',

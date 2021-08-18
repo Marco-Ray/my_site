@@ -1,7 +1,7 @@
 <template>
   <div class="blog h-screen text-red-600 text-6xl">
-    <router-link to="/">
-      <i class="fa fa-times absolute right-5" />
+    <router-link to="/blogs">
+      <i class="fa fa-times absolute top-5 right-5" />
     </router-link>
     <div id="btt" class="fixed w-full bottom-5 right-5 z-10 cursor-pointer flex justify-end">
       <i v-show="!isTop"
@@ -9,18 +9,19 @@
         @click.prevent="backToTop"
       />
     </div>
-    <mark-down-page></mark-down-page>
+    <mark-down-page :file_path="file_path"></mark-down-page>
   </div>
 </template>
 
 <script>
 import MarkDownPage from '@/components/MarkDownPage';
 export default {
-  name: 'Blog',
+  name: 'BlogPost',
   components: { MarkDownPage },
   data() {
     return {
       isTop: true,
+      file_path: this.$route.params.file_path,
     }
   },
   methods: {
