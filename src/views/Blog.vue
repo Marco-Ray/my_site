@@ -47,8 +47,8 @@ export default {
 <style scoped>
 @media (max-width:959px){
   #btt {
-    bottom: 0px;
-    right: 0px;
+    bottom: 0;
+    right: 0;
     background-color: black;
     justify-content: center;
   }
