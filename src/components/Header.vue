@@ -6,7 +6,9 @@
           <div class="flex items-center justify-between">
             <div id="logo"
               class="text-white text-2xl font-bold
-              lg:text-3xl">
+              lg:text-3xl"
+                 @click.prevent="toggleAuthModal"
+            >
               Zehuan Wang
             </div>
 
@@ -69,14 +71,33 @@
             </svg>
           </a>
         </div>
+
+        <div v-if="!userLoggedIn">
+          <a href="#" class="px-2 text-white"
+             @click.prevent="toggleAuthModal"
+          >
+            LogIn
+          </a>
+        </div>
+        <template v-if="userLoggedIn">
+          <a href="#" class="px-2 text-white"
+             @click.prevent="signout"
+          >
+            SignOut
+          </a>
+        </template>
       </div>
   </nav>
   </transition>
 </template>
 
 <script>
+import { mapMutations, mapState } from 'vuex';
+
 export default {
   name: 'Header',
+  components: {
+  },
   data() {
     return {
       isOpen: false,
@@ -84,6 +105,24 @@ export default {
         "transition-colors duration-500 transform hover:bg-gray-300 hover:bg-opacity-30 hover:cursor-pointer",
     }
   },
+  computed: {
+    ...mapState({
+      userLoggedIn: (state) => state.auth.userLoggedIn,
+    })
+  },
+  methods: {
+    ...mapMutations(['toggleAuthModal']),
+    signout() {
+      this.$store.dispatch('signout', {
+        router: this.$router,
+        route: this.$route,
+      });
+
+      if (this.$route.meta.requiresAuth) {
+        this.$router.push({ name: 'home' });
+      }
+    },
+  }
 };
 </script>
 

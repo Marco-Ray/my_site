@@ -66,6 +66,7 @@
 <script>
 import AppBlogItem from '@/components/BlogItem.vue';
 import jsonFiles from '../../public/md_files.json';
+// import { storage } from '@/includes/firebase';
 
 export default {
   name: 'Blogs',

@@ -4,6 +4,9 @@ import router from './router';
 import store from './store';
 import './assets/tailwind.css';
 import 'animate.css';
+import './includes/firebase';
+import VeeValidatePlugin from './includes/validation';
+import { auth } from './includes/firebase';
 
 import VMdPreview from '@kangc/v-md-editor/lib/preview';
 import '@kangc/v-md-editor/lib/style/preview.css';
@@ -35,12 +38,19 @@ VMdPreview.use(createEmojiPlugin());
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 
-const app = createApp(App);
+let app;
 
-app.use(store);
-app.use(router);
-app.use(VueAxios, axios);
-app.use(VMdPreview);
+auth.onAuthStateChanged(() => {
+  if (!app) {
+    app = createApp(App);
 
+    app.use(store);
+    app.use(router);
+    app.use(VueAxios, axios);
+    app.use(VMdPreview);
+    app.use(VeeValidatePlugin);
 
-app.mount('#app');
+    app.mount('#app');
+  }
+});
+

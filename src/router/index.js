@@ -6,6 +6,7 @@ import Portfolio from '../views/Portfolio.vue';
 import BlogPost from '../views/BlogPost.vue';
 import Blogs from '../views/Blogs';
 import Contact from '../views/Contact.vue';
+import Manage from '../views/Manage.vue';
 
 const routes = [
   {
@@ -45,6 +46,17 @@ const routes = [
     component: Portfolio,
     // meta: { transition: 'left-slide' },
     meta: {
+      enter: 'animate__animated animate__fadeIn ',
+      leave: 'animate__animated animate__fadeOut',
+    },
+  },
+  {
+    path: '/manage',
+    name: 'Manage',
+    component: Manage,
+    // meta: { transition: 'left-slide' },
+    meta: {
+      requiresAuth: true,
       enter: 'animate__animated animate__fadeIn ',
       leave: 'animate__animated animate__fadeOut',
     },
