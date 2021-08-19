@@ -4,7 +4,9 @@
       <span class="text-sm font-light text-gray-600 dark:text-gray-400">
         {{ blog.date }}
       </span>
-      <p class="px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-200 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500">
+      <p class="px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-200 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500"
+         @click.prevent="filterByClick"
+      >
         {{ blog.type }}
       </p>
     </div>
@@ -34,6 +36,7 @@
 export default {
   name: 'BlogItem',
   props: ['blog'],
+  emits: ['filterByClick'],
   data() {
     return {
       readMore: false,
@@ -47,6 +50,18 @@ export default {
         this.readMoreText = 'Hidden'
       } else {
         this.readMoreText = 'Read More'
+      }
+    },
+    filterByClick() {
+      switch(this.blog.type) {
+        case 'Tech':
+          this.$emit('filterByClick', '2');
+          break;
+        case 'Art':
+          this.$emit('filterByClick', '3');
+          break;
+        default:
+          this.$emit('filterByClick', '1');
       }
     }
   },

@@ -5,7 +5,7 @@
       <i class="fa fa-times absolute text-white top-5 text-7xl right-5" />
     </router-link>
 
-    <h1 class="text-white my-20 text-5xl">My Blogs</h1>
+    <h1 class="text-white my-14 py-6 px-28 lg:px-40 text-5xl border-b-2 border-red-500">My Blogs</h1>
 
     <div class="flex w-10/12 justify-between items-stretch">
       <div class="flex gap-2">
@@ -20,7 +20,8 @@
         <!--  Filter Blog By Type-->
         <select v-model="filterByType"
                 class="inline-block mt-4 py-1.5 px-3 text-gray-800 border border-gray-300
-                transition duration-500 focus:outline-none focus:border-black rounded">
+                transition duration-500 focus:outline-none focus:border-black rounded"
+        >
           <option value="1">All</option>
           <option value="2">Tech</option>
           <option value="3">Art</option>
@@ -37,10 +38,10 @@
     </div>
 
     <!--  Blog List-->
-    <transition-group tag="ol" class="gap-10 w-10/12"
+    <transition-group tag="ol" class="gap-10 w-10/12" name="flip"
                       enter-active-class="animate__animated animate__flipInX"
-                      leave-active-class="animate__animated animate__flipOutX absolute"
-                      move-class="transition-transform duration-1000 linear"
+                      leave-active-class="animate__animated animate__flipOutX "
+                      move-class="transition duration-1000 linear"
                       mode="out-in"
     >
       <app-blog-item v-for="(blog, index) in sortedBlogs"
@@ -48,8 +49,17 @@
                      :data-index="index"
                      :blog="blog"
                      class="my-5"
+                     @filterByClick="filterByClick"
       />
     </transition-group>
+
+    <div id="btt" class="fixed w-full bottom-5 right-5 z-10 cursor-pointer text-white text-6xl flex justify-end">
+      <i v-show="!isTop"
+         class="fa fa-arrow-up"
+         @click.prevent="backToTop"
+      />
+    </div>
+
   </div>
 </template>
 
@@ -68,6 +78,7 @@ export default {
       blogs_filtered: [],
       filterByType: '1',
       sortByTime: '1',
+      isTop: true,
     }
   },
   computed: {
@@ -88,10 +99,29 @@ export default {
     reset() {
       this.sortByTime = '1';
       this.filterByType = '1';
+    },
+    filterByClick(val) {
+      this.filterByType = val;
+    },
+    handleScroll() {
+      const { scrollTop } = document.documentElement;
+      this.isTop = scrollTop === 0;
+    },
+    backToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
     }
   },
+  created() {
+    window.addEventListener('scroll', this.handleScroll);
+    this.getFiles();
+  },
   mounted() {
-    this.getFiles()
+  },
+  beforeUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
   },
   watch: {
     filterByType:{
@@ -112,5 +142,12 @@ export default {
 </script>
 
 <style scoped>
-
+@media (max-width:959px){
+  #btt {
+    bottom: 0;
+    right: 0;
+    background-color: black;
+    justify-content: center;
+  }
+}
 </style>

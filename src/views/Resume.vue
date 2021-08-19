@@ -1,16 +1,15 @@
 <template>
-  <div class="resume bg-black h-screen text-white text-7xl">
-    <router-link to="/">
-      <i class="fa fa-times absolute right-0"></i>
-    </router-link>
-    <h1>This is the resume page</h1>
-  </div>
+  <app-to-be-continue />
 </template>
 
 <script>
+import AppToBeContinue from '@/components/ToBeContinue.vue';
 export default {
-  name: 'Resume'
-};
+  name: 'Resume',
+  components: {
+    AppToBeContinue,
+  }
+}
 </script>
 
 <style scoped>
