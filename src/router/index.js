@@ -72,7 +72,7 @@ const routes = [
     },
   },
   {
-    path: '/blogs/:title',
+    path: '/blogs/:id',
     name: 'BlogPost',
     component: BlogPost,
     // meta: { transition: 'left-slide' },

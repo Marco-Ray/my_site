@@ -9,19 +9,21 @@
         @click.prevent="backToTop"
       />
     </div>
-    <mark-down-page :file_path="file_path"></mark-down-page>
+    <mark-down-page :url="url"></mark-down-page>
   </div>
 </template>
 
 <script>
 import MarkDownPage from '@/components/MarkDownPage';
+import { filesCollection } from '@/includes/firebase';
+
 export default {
   name: 'BlogPost',
   components: { MarkDownPage },
   data() {
     return {
       isTop: true,
-      file_path: this.$route.params.file_path,
+      url: this.$route.params.url,
     }
   },
   methods: {
@@ -42,6 +44,15 @@ export default {
   beforeUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
   },
+  async beforeRouteEnter(to, from, next) {
+    const docsnapshot = await filesCollection.doc(to.params.id).get();
+
+    next((vm) => {
+      if (!docsnapshot.exists) {
+        vm.$router.push({ name: 'Blogs' });
+      }
+    });
+  }
 };
 </script>
 

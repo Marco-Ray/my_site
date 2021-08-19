@@ -45,7 +45,7 @@
                       mode="out-in"
     >
       <app-blog-item v-for="(blog, index) in sortedBlogs"
-                     :key="blog.title"
+                     :key="blog.docID"
                      :data-index="index"
                      :blog="blog"
                      class="my-5"
@@ -65,8 +65,9 @@
 
 <script>
 import AppBlogItem from '@/components/BlogItem.vue';
-import jsonFiles from '../../public/md_files.json';
-// import { storage } from '@/includes/firebase';
+import { filesCollection } from '@/includes/firebase';
+// import jsonFiles from '../../public/md_files.json';
+
 
 export default {
   name: 'Blogs',
@@ -80,6 +81,8 @@ export default {
       filterByType: '1',
       sortByTime: '1',
       isTop: true,
+      maxPerPage: 10,
+      pendingRequest: false,
     }
   },
   computed: {
@@ -93,8 +96,39 @@ export default {
     },
   },
   methods: {
-    getFiles() {
-      this.blogs = jsonFiles.files;
+    async getFiles() {
+      if (this.pendingRequest) {
+        return;
+      }
+
+      this.pendingRequest = true;
+
+      let snapshots;
+      if (this.blogs.length) {
+        const lastDoc = await filesCollection
+          .doc(this.blogs[this.blogs.length - 1].docID)
+          .get();
+        snapshots = await filesCollection
+          .orderBy('modified_name')
+          .startAfter(lastDoc)
+          .limit(this.maxPerPage)
+          .get();
+      } else {
+        snapshots = await filesCollection
+          .orderBy('modified_name')
+          .limit(this.maxPerPage)
+          .get();
+      }
+
+      snapshots.forEach((document) => {
+        this.blogs.push({
+          ...document.data(),
+          docID: document.id,
+        });
+      });
+
+      this.pendingRequest = false;
+
       this.blogs_filtered = this.blogs;
     },
     reset() {
@@ -105,8 +139,15 @@ export default {
       this.filterByType = val;
     },
     handleScroll() {
-      const { scrollTop } = document.documentElement;
+      const { scrollTop, offsetHeight } = document.documentElement;
+      const { innerHeight } = window;
+      const bottomOfWindow = Math.round(scrollTop) + innerHeight === offsetHeight;
+
       this.isTop = scrollTop === 0;
+
+      if (bottomOfWindow) {
+        this.getFiles();
+      }
     },
     backToTop() {
       window.scrollTo({
@@ -115,9 +156,10 @@ export default {
       });
     }
   },
-  created() {
-    window.addEventListener('scroll', this.handleScroll);
+  async created() {
     this.getFiles();
+
+    window.addEventListener('scroll', this.handleScroll);
   },
   mounted() {
   },

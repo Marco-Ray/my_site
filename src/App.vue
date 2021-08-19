@@ -7,15 +7,20 @@
       <component :is="Component" class="w-full h-full z-20"/>
     </transition>
   </router-view>
-
+  <auth-model />
 </template>
 
 <script>
+import AuthModel from '@/components/Auth.vue';
 
 export default {
   name: 'app',
   components: {
-  }
+    AuthModel,
+  },
+  created() {
+    this.$store.dispatch('init_login');
+  },
 };
 </script>
 

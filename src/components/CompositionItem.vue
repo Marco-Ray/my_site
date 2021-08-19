@@ -41,6 +41,16 @@
           />
           <ErrorMessage name="type" class="text-red-600" />
         </div>
+        <div class="mb-3">
+          <label class="inline-block mb-2">Type</label>
+          <vee-field type="text" name="compendium"
+                     class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300
+                        transition duration-500 focus:outline-none focus:border-black rounded"
+                     placeholder="Edit Compendium"
+                     @input="updateUnsavedFlag(true)"
+          />
+          <ErrorMessage name="compendium" class="text-red-600" />
+        </div>
         <button type="submit" class="py-1.5 px-3 rounded text-white bg-green-600"
                 @disable="in_submission"
         >

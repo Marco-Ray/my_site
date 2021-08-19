@@ -135,6 +135,7 @@ export default {
             modified_name: task.snapshot.ref.name,
             datePosted: new Date().toString(),
             type: '',
+            compendium: 'This is one of my Blog Post',
           };
 
           post.url = await task.snapshot.ref.getDownloadURL();
@@ -142,7 +143,7 @@ export default {
           this.getFiles();
 
           this.uploads[uploadIndex].variant = 'bg-green-400';
-          this.uploads[uploadIndex].icon = 'fas fa-check';
+          this.uploads[uploadIndex].icon = 'fa fa-check';
           this.uploads[uploadIndex].text_class = 'text-green-400';
 
           this.tasksUploading -= 1;

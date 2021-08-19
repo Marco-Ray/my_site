@@ -3,8 +3,6 @@
 </template>
 
 <script>
-import marked from 'marked';
-
 export default {
   name: 'MarkDownPage',
   data() {
@@ -12,10 +10,11 @@ export default {
       temp: ''
     }
   },
-  props: ['file_path'],
+  props: ['url'],
   methods: {
     transform() {
-      this.axios.get(this.file_path).then((res) => {
+      const url = 'https://firebasestorage.googleapis.com/v0/b/my-site-c1432.appspot.com/o/BlogFiles%2FDCGAN.md?alt=media&token=083468e4-0ec1-4cf9-87a1-0256474f4bb0';
+      this.axios.get(url).then((res) => {
         this.temp = res.data;
       });
     },
