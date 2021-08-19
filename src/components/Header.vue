@@ -79,12 +79,19 @@
             LogIn
           </a>
         </div>
-        <template v-if="userLoggedIn">
-          <a href="#" class="px-2 text-white"
-             @click.prevent="signout"
-          >
-            SignOut
-          </a>
+        <template v-else>
+          <li class="list-none">
+            <router-link class="px-2 text-white" :to="{ name: 'Manage'}">
+              Manage
+            </router-link>
+          </li>
+          <li class="list-none">
+            <a href="#" class="px-2 text-white"
+               @click.prevent="signout"
+            >
+              SignOut
+            </a>
+          </li>
         </template>
       </div>
   </nav>

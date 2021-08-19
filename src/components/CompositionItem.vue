@@ -1,16 +1,16 @@
 <template>
   <div class="border border-gray-200 p-3 mb-4 rounded">
     <div v-show="!showForm">
-      <h4 class="inline-block text-2xl font-bold">{{ song.modified_name }}</h4>
+      <h4 class="inline-block text-2xl font-bold">{{ file.modified_name }}</h4>
       <button class="ml-1 py-1 px-2 text-sm rounded text-white bg-red-600 float-right"
-              @click.prevent="deleteSong"
+              @click.prevent="deleteFile"
       >
         <i :class="icon_variant"></i>
       </button>
       <button class="ml-1 py-1 px-2 text-sm rounded text-white bg-blue-600 float-right"
               @click.prevent="showForm = !showForm"
       >
-        <i class="fa fa-pencil-alt"></i>
+        <i class="fa fa-edit"></i>
       </button>
     </div>
     <div v-show="showForm">
@@ -18,38 +18,38 @@
            v-if="show_alert" :class="alert_variant">
         {{ alert_msg }}
       </div>
-      <vee-form :validation-schema="schema" :initial-values="song"
+      <vee-form :validation-schema="schema" :initial-values="file"
                 @submit="edit"
       >
         <div class="mb-3">
-          <label class="inline-block mb-2">{{ $t('edit.title') }}</label>
+          <label class="inline-block mb-2">Title</label>
           <vee-field type="text" name="modified_name"
                      class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300
                         transition duration-500 focus:outline-none focus:border-black rounded"
-                     placeholder="Enter Song Title"
+                     placeholder="Enter File Title"
                      @input="updateUnsavedFlag(true)"
           />
           <ErrorMessage name="modified_name" class="text-red-600" />
         </div>
         <div class="mb-3">
-          <label class="inline-block mb-2">{{ $t('edit.genre') }}</label>
-          <vee-field type="text" name="genre"
+          <label class="inline-block mb-2">Type</label>
+          <vee-field type="text" name="type"
                      class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300
                         transition duration-500 focus:outline-none focus:border-black rounded"
-                     placeholder="Enter Genre"
+                     placeholder="Enter Type"
                      @input="updateUnsavedFlag(true)"
           />
-          <ErrorMessage name="genre" class="text-red-600" />
+          <ErrorMessage name="type" class="text-red-600" />
         </div>
         <button type="submit" class="py-1.5 px-3 rounded text-white bg-green-600"
                 @disable="in_submission"
         >
-          {{ $t('com_item.submit') }}
+          Submit
         </button>
         <button type="button" class="py-1.5 px-3 rounded text-white bg-gray-600"
                 @click.prevent="showForm = false" @disable="in_submission"
         >
-          {{ $t('com_item.go_back') }}
+          GoBack
         </button>
       </vee-form>
     </div>
@@ -57,16 +57,16 @@
 </template>
 
 <script>
-import { songsCollection, storage } from '@/includes/firebase';
+import { filesCollection, storage } from '@/includes/firebase';
 
 export default {
   name: 'compositionItem',
   props: {
-    song: {
+    file: {
       type: Object,
       required: true,
     },
-    updateSong: {
+    updateFile: {
       type: Function,
       required: true,
     },
@@ -74,7 +74,7 @@ export default {
       type: Number,
       required: true,
     },
-    removeSong: {
+    removeFile: {
       type: Function,
       required: true,
     },
@@ -87,12 +87,12 @@ export default {
       showForm: false,
       schema: {
         modified_name: 'required',
-        genre: 'alpha_spaces',
+        Type: 'alpha_spaces',
       },
       in_submission: false,
       show_alert: false,
       alert_variant: 'bg-blue-500',
-      alert_msg: 'Please wait! Updating song info.',
+      alert_msg: 'Please wait! Updating file info.',
       icon_variant: 'fa fa-times',
     };
   },
@@ -101,10 +101,10 @@ export default {
       this.in_submission = true;
       this.show_alert = true;
       this.alert_variant = 'bg-blue-500';
-      this.alert_msg = 'Please wait! Updating song info.';
+      this.alert_msg = 'Please wait! Updating file info.';
 
       try {
-        await songsCollection.doc(this.song.docID).update(values);
+        await filesCollection.doc(this.file.docID).update(values);
       } catch (error) {
         this.in_submission = false;
         this.alert_variant = 'bg-red-500';
@@ -112,7 +112,7 @@ export default {
         return;
       }
 
-      this.updateSong(this.index, values);
+      this.updateFile(this.index, values);
       this.updateUnsavedFlag(false);
 
       this.in_submission = false;
@@ -124,15 +124,15 @@ export default {
         this.showForm = false;
       }, 2000);
     },
-    async deleteSong() {
-      this.icon_variant = 'fas fa-spinner fa-spin';
+    async deleteFile() {
+      this.icon_variant = 'fa fa-spinner fa-spin';
       const storageRef = storage.ref();
-      const songRef = storageRef.child(`songs/${this.song.original_name}`);
-      await songRef.delete();
+      const fileRef = storageRef.child(`BlogFiles/${this.file.original_name}`);
+      await fileRef.delete();
 
-      await songsCollection.doc(this.song.docID).delete();
+      await filesCollection.doc(this.file.docID).delete();
 
-      this.removeSong(this.index);
+      this.removeFile(this.index);
     },
   },
 };

@@ -1,4 +1,4 @@
-import { auth, usersCollection } from '@/includes/firebase';
+import { auth } from '@/includes/firebase';
 
 export default {
   state: {

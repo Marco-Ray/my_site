@@ -2,9 +2,9 @@
   <div class="bg-white rounded border border-gray-200 relative flex flex-col">
     <div class="px-6 pt-6 pb-5 font-bold border-b border-gray-200">
       <span class="card-title">
-        {{ $t('upload.upload') }}
+        Upload
       </span>
-      <i class="fas fa-upload float-right text-green-400 text-2xl"></i>
+      <i class="fa fa-upload float-right text-green-400 text-2xl"></i>
     </div>
     <div class="p-6">
       <!-- Upload Dropbox -->
@@ -21,7 +21,7 @@
         @dragleave.prevent.stop="is_dragover = false"
         @drop.prevent.stop="upload($event)"
       >
-        <h5>{{ $t('upload.dropbox') }}</h5>
+        <h5>DropBox</h5>
       </div>
       <input type="file" multiple @change="upload($event)" />
       <hr class="my-6" />
@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import { storage, auth, songsCollection } from '@/includes/firebase';
+import { storage, auth, filesCollection } from '@/includes/firebase';
 
 export default {
   name: 'Upload',
@@ -67,7 +67,7 @@ export default {
     };
   },
   props: {
-    getSongs: {
+    getFiles: {
       type: Function,
       required: true,
     },
@@ -92,9 +92,6 @@ export default {
       this.tasksUploading = files.length;
 
       files.forEach((file) => {
-        if (file.type !== 'audio/mpeg') {
-          return;
-        }
 
         if (!navigator.onLine) {
           this.uploads.push({
@@ -102,7 +99,7 @@ export default {
             current_progress: 100,
             name: file.name,
             variant: 'bg-red-400',
-            icon: 'fas fa-times',
+            icon: 'fa fa-times',
             text_class: 'text-red-400',
           });
           this.tasksUploading = 0;
@@ -110,15 +107,15 @@ export default {
         }
 
         const storageRef = storage.ref(); // music-4aefa.appspot.com
-        const songsRef = storageRef.child(`songs/${file.name}`); // music-4aefa.appspot.com/songs/example.mp3
-        const task = songsRef.put(file);
+        const postsRef = storageRef.child(`BlogFiles/${file.name}`);
+        const task = postsRef.put(file);
 
         const uploadIndex = this.uploads.push({
           task,
           current_progress: 0,
           name: file.name,
           variant: 'bg-blue-400',
-          icon: 'fas fa-spinner fa-spin',
+          icon: 'fa fa-spinner fa-spin',
           text_class: '',
         }) - 1;
 
@@ -127,28 +124,22 @@ export default {
           this.uploads[uploadIndex].current_progress = progress;
         }, () => {
           this.uploads[uploadIndex].variant = 'bg-red-400';
-          this.uploads[uploadIndex].icon = 'fas fa-times';
+          this.uploads[uploadIndex].icon = 'fa fa-times';
           this.uploads[uploadIndex].text_class = 'text-red-400';
 
           this.upload_show_alert = true;
         }, async () => {
-          const song = {
+          const post = {
             uid: auth.currentUser.uid,
-            display_name: auth.currentUser.displayName,
             original_name: task.snapshot.ref.name,
             modified_name: task.snapshot.ref.name,
             datePosted: new Date().toString(),
-            genre: '',
-            comment_count: 0,
+            type: '',
           };
 
-          song.url = await task.snapshot.ref.getDownloadURL();
-          await songsCollection.add(song);
-          this.getSongs();
-          // const songRef = await songsCollection.add(song);
-          // const songSnapshot = await songRef.get();
-          //
-          // this.pushSong(songSnapshot);
+          post.url = await task.snapshot.ref.getDownloadURL();
+          await filesCollection.add(post);
+          this.getFiles();
 
           this.uploads[uploadIndex].variant = 'bg-green-400';
           this.uploads[uploadIndex].icon = 'fas fa-check';

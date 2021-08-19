@@ -1,8 +1,11 @@
 <template>
   <section class="container mx-auto mt-6">
+    <router-link to="/">
+      <i class="fa fa-times absolute text-white text-6xl top-0 right-0"></i>
+    </router-link>
     <div class="md:grid md:grid-cols-3 md:gap-4">
       <div class="col-span-1">
-        <app-upload :getSongs="getSongs"
+        <app-upload :getFiles="getFiles"
                     :updateUnfinishedFlag="updateUnfinishedFlag" />
       </div>
       <div class="col-span-2">
@@ -13,11 +16,11 @@
           </div>
           <div class="p-6">
             <!-- Composition Items-->
-            <composition-item v-for="(song, i) in songs" :key="song.docID"
-                              :song="song"
-                              :updateSong="updateSong"
+            <composition-item v-for="(file, i) in files" :key="file.docID"
+                              :file="file"
+                              :updateFile="updateFile"
                               :index="i"
-                              :removeSong="removeSong"
+                              :removeFile="removeFile"
                               :updateUnsavedFlag="updateUnsavedFlag"
             />
           </div>
@@ -30,7 +33,7 @@
 <script>
 // import store from '@/store';
 import AppUpload from '@/components/Upload.vue';
-import { songsCollection, auth } from '@/includes/firebase';
+import { filesCollection, auth } from '@/includes/firebase';
 import CompositionItem from '@/components/CompositionItem.vue';
 
 export default {
@@ -41,35 +44,34 @@ export default {
   },
   data() {
     return {
-      songs: [],
+      files: [],
       unsavedFlag: false,
       unfinishedFlag: false,
-      sort: '1',
     };
   },
   created() {
-    this.getSongs();
+    this.getFiles();
   },
   methods: {
-    updateSong(i, values) {
-      this.songs[i].modified_name = values.modified_name;
-      this.songs[i].genre = values.genre;
+    updateFile(i, values) {
+      this.files[i].modified_name = values.modified_name;
+      this.files[i].genre = values.genre;
     },
-    async getSongs() {
-      const snapshots = await songsCollection
+    async getFiles() {
+      const snapshots = await filesCollection
         .where('uid', '==', auth.currentUser.uid).get();
 
-      this.songs = [];
+      this.files = [];
 
       snapshots.forEach((doc) => [
-        this.songs.push({
+        this.files.push({
           docID: doc.id,
           ...doc.data(),
         }),
       ]);
     },
-    removeSong(i) {
-      this.songs.splice(i, 1);
+    removeFile(i) {
+      this.files.splice(i, 1);
     },
     updateUnsavedFlag(value) {
       this.unsavedFlag = value;
