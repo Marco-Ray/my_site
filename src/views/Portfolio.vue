@@ -1,5 +1,5 @@
 <template>
-  <div class="about bg-black h-screen flex flex-col items-center">
+  <div class="about bg-black h-full min-h-screen flex flex-col items-center">
     <!-- Back Button-->
     <router-link to="/">
       <i class="fa fa-times absolute text-white top-5 text-7xl right-5" />

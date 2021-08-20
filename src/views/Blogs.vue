@@ -11,7 +11,7 @@
       <div class="flex gap-2">
         <!--  Sort Blog By Time-->
         <select v-model="sortByTime"
-                class="inline-block mt-4 py-1.5 px-3 text-gray-800 border border-gray-300
+                class="inline-block py-1.5 px-3 text-gray-800 border border-gray-300
                 transition duration-500 focus:outline-none focus:border-black rounded">
           <option value="1">Latest</option>
           <option value="2">Oldest</option>
@@ -19,16 +19,28 @@
 
         <!--  Filter Blog By Type-->
         <select v-model="filterByType"
-                class="inline-block mt-4 py-1.5 px-3 text-gray-800 border border-gray-300
+                class="inline-block py-1.5 px-3 text-gray-800 border border-gray-300
                 transition duration-500 focus:outline-none focus:border-black rounded"
         >
           <option value="All">All</option>
           <option v-for="type in types" :key="type">{{ type }}</option>
         </select>
+
+        <router-link class="text-white" :to="{ name: 'BlogManage'}">
+          <svg class="w-10 h-10 fill-current" viewBox="0 0 1024 1024"
+               xmlns="http://www.w3.org/2000/svg">
+            <path d="M512 486.4c-83.2 0-153.6-70.4-153.6-153.6 0-83.2 70.4-153.6 153.6-153.6 83.2 0 153.6 70.4 153.6 153.6 6.4 83.2-64 153.6-153.6 153.6z m0-288c-76.8 0-134.4 64-134.4 134.4s64 134.4 134.4 134.4c76.8 0 134.4-64 134.4-134.4S588.8 198.4 512 198.4z"></path>
+            <path d="M518.4 332.8m-96 0a96 96 0 1 0 192 0 96 96 0 1 0-192 0Z"></path>
+            <path d="M371.2 633.6h-25.6c-19.2 0-38.4-19.2-38.4-38.4V460.8c0-19.2 19.2-38.4 38.4-38.4h19.2c19.2 0 38.4 19.2 38.4 38.4v134.4c0 19.2-12.8 38.4-32 38.4z m-25.6-192c-12.8 0-19.2 6.4-19.2 19.2v134.4c0 12.8 6.4 19.2 19.2 19.2h19.2c12.8 0 19.2-6.4 19.2-19.2V460.8c0-12.8-6.4-19.2-19.2-19.2h-19.2zM678.4 633.6h-19.2c-19.2 0-38.4-19.2-38.4-38.4V460.8c0-19.2 19.2-38.4 38.4-38.4h19.2c19.2 0 38.4 19.2 38.4 38.4v134.4c0 19.2-19.2 38.4-38.4 38.4z m-25.6-192c-12.8 0-19.2 6.4-19.2 19.2v134.4c0 12.8 6.4 19.2 19.2 19.2h19.2c12.8 0 19.2-6.4 19.2-19.2V460.8c0-12.8-6.4-19.2-19.2-19.2h-19.2z"></path>
+            <path d="M473.6 844.8H448c-25.6 0-51.2-19.2-51.2-51.2V435.2c0-6.4 6.4-6.4 6.4-6.4 6.4 0 6.4 6.4 6.4 6.4v358.4c0 19.2 12.8 32 32 32h25.6c19.2 0 32-12.8 32-32v-108.8c0-6.4 6.4-6.4 6.4-6.4 6.4 0 6.4 6.4 6.4 6.4v108.8c12.8 32-12.8 51.2-38.4 51.2z"></path>
+            <path d="M582.4 844.8h-25.6c-25.6 0-51.2-19.2-51.2-51.2v-108.8c0-6.4 6.4-6.4 6.4-6.4l6.4 6.4v108.8c0 19.2 12.8 32 32 32H576c19.2 0 32-12.8 32-32V435.2c0-6.4 6.4-6.4 6.4-6.4 6.4 0 6.4 6.4 6.4 6.4v358.4c12.8 32-12.8 51.2-38.4 51.2z"></path>
+            <path d="M556.8 576c0 19.2-12.8 32-32 32h-25.6c-12.8 0-25.6-12.8-25.6-32s12.8-32 32-32h25.6c12.8 0 25.6 12.8 25.6 32z"></path>
+          </svg>
+        </router-link>
       </div>
 
       <!--  Reset-->
-      <button class="inline-block bg-red-500 mt-4 py-1.5 px-3 text-gray-200 rounded
+      <button class="inline-block bg-red-500 py-1.5 px-3 text-gray-200 rounded
               transition duration-500 hover:bg-red-700"
               @click="reset"
       >
@@ -65,11 +77,15 @@
 <script>
 import AppBlogItem from '@/components/Blogs/BlogItem.vue';
 import { filesCollection } from '@/includes/firebase';
+import { mapState } from 'vuex';
 
 
 export default {
   name: 'Blogs',
   components: {
+    ...mapState({
+      userLoggedIn: (state) => state.auth.userLoggedIn,
+    }),
     AppBlogItem,
   },
   data() {

@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import store from '@/store';
+
 import Home from '../views/Home.vue';
 import About from '../views/About.vue';
 import Resume from '../views/Resume.vue';
@@ -6,7 +8,8 @@ import Portfolio from '../views/Portfolio.vue';
 import BlogPost from '../views/BlogPost.vue';
 import Blogs from '../views/Blogs';
 import Contact from '../views/Contact.vue';
-import Manage from '../views/Manage.vue';
+import BlogManage from '../views/BlogManage.vue';
+import ImageManage from '../views/ImageManage.vue';
 
 const routes = [
   {
@@ -41,6 +44,17 @@ const routes = [
     },
   },
   {
+    path: '/image-manage',
+    name: 'ImageManage',
+    component: ImageManage,
+    // meta: { transition: 'left-slide' },
+    meta: {
+      requiresAuth: true,
+      enter: 'animate__animated animate__fadeIn ',
+      leave: 'animate__animated animate__fadeOut',
+    },
+  },
+  {
     path: '/portfolio',
     name: 'Portfolio',
     component: Portfolio,
@@ -51,9 +65,9 @@ const routes = [
     },
   },
   {
-    path: '/manage',
-    name: 'Manage',
-    component: Manage,
+    path: '/blog-manage',
+    name: 'BlogManage',
+    component: BlogManage,
     // meta: { transition: 'left-slide' },
     meta: {
       requiresAuth: true,
@@ -101,6 +115,19 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
   linkExactActiveClass: 'text-red-500',
+});
+
+router.beforeEach((to, from, next) => {
+  if (!to.matched.some((record) => record.meta.requiresAuth)) {
+    next();
+    return;
+  }
+
+  if (store.state.auth.userLoggedIn) {
+    next();
+  } else {
+    next({ name: 'Home' });
+  }
 });
 
 export default router;
