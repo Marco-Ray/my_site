@@ -7,6 +7,8 @@ import 'animate.css';
 import './includes/firebase';
 import VeeValidatePlugin from './includes/validation';
 import { auth } from './includes/firebase';
+import ProgressBar from './includes/progress-bar';
+import 'nprogress/nprogress.css';
 
 import VMdPreview from '@kangc/v-md-editor/lib/preview';
 import '@kangc/v-md-editor/lib/style/preview.css';
@@ -37,6 +39,8 @@ VMdPreview.use(createEmojiPlugin());
 
 import axios from 'axios';
 import VueAxios from 'vue-axios';
+
+ProgressBar(router);
 
 let app;
 

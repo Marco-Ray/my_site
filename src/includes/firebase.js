@@ -18,10 +18,12 @@ const db = firebase.firestore();
 const storage = firebase.storage();
 
 const filesCollection = db.collection('BlogFiles');
+const imagesCollection = db.collection('Images');
 
 export {
   auth,
   db,
   filesCollection,
+  imagesCollection,
   storage,
 };

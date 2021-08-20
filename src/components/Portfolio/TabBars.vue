@@ -37,6 +37,16 @@ export default {
     return {
       tabActive: 1,
     }
+  },
+  watch: {
+    tabActive(newVal) {
+      if (newVal===1) {
+        this.$emit('toggleAlbum', 'CoCo')
+      } else {
+        this.$emit('toggleAlbum', 'Photograph')
+      }
+
+    }
   }
 };
 </script>

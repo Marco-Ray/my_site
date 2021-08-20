@@ -25,18 +25,9 @@ export default {
 </script>
 
 <style lang="scss">
-//.left-slide-enter-from, .right-slide-leave-to{
-//  //opacity: 0;
-//  transform: translateX(100%);
-//}
-//.left-slide-leave-to, .right-slide-enter-from{
-//  //opacity: 0;
-//  transform: translateX(-100%);
-//}
-//
-//.left-slide-enter-active, .left-slide-leave-active,
-//.right-slide-enter-active, .right-slide-leave-active{
-//  transition: transform ease 0.7s;
-//}
+#nprogress .bar {
+  background: red !important; //自定义颜色
+  height: 50px;
+}
 
 </style>

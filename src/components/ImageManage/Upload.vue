@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import { storage, auth, filesCollection } from '@/includes/firebase';
+import { storage, auth, imagesCollection } from '@/includes/firebase';
 
 export default {
   name: 'Upload',
@@ -67,13 +67,17 @@ export default {
     };
   },
   props: {
-    getFiles: {
+    getImages: {
       type: Function,
       required: true,
     },
     updateUnfinishedFlag: {
       type: Function,
     },
+    album: {
+      type: String,
+      required: true,
+    }
   },
   computed: {
     upload_in_submission() {
@@ -92,6 +96,9 @@ export default {
       this.tasksUploading = files.length;
 
       files.forEach((file) => {
+        if (file.type !== 'image/jpeg') {
+          return;
+        }
 
         if (!navigator.onLine) {
           this.uploads.push({
@@ -107,8 +114,8 @@ export default {
         }
 
         const storageRef = storage.ref(); // music-4aefa.appspot.com
-        const postsRef = storageRef.child(`BlogFiles/${file.name}`);
-        const task = postsRef.put(file);
+        const imageRef = storageRef.child(`Images/${this.album}/${file.name}`);
+        const task = imageRef.put(file);
 
         const uploadIndex = this.uploads.push({
           task,
@@ -127,20 +134,20 @@ export default {
           this.uploads[uploadIndex].icon = 'fa fa-times';
           this.uploads[uploadIndex].text_class = 'text-red-400';
 
+          this.tasksUploading -= 1;
           this.upload_show_alert = true;
         }, async () => {
-          const post = {
+          const image = {
             uid: auth.currentUser.uid,
             original_name: task.snapshot.ref.name,
             modified_name: task.snapshot.ref.name,
+            album: this.album,
             datePosted: new Date().toString(),
-            type: '',
-            compendium: 'This is one of my Blog Post',
           };
 
-          post.url = await task.snapshot.ref.getDownloadURL();
-          await filesCollection.add(post);
-          this.getFiles();
+          image.url = await task.snapshot.ref.getDownloadURL();
+          await imagesCollection.add(image);
+          this.getImages();
 
           this.uploads[uploadIndex].variant = 'bg-green-400';
           this.uploads[uploadIndex].icon = 'fa fa-check';

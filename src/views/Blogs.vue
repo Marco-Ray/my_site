@@ -1,5 +1,5 @@
 <template>
-  <div class="about bg-black h-screen flex flex-col items-center">
+  <div class="about bg-black h-full min-h-screen flex flex-col items-center">
     <!-- Back Button-->
     <router-link to="/">
       <i class="fa fa-times absolute text-white top-5 text-7xl right-5" />
@@ -65,6 +65,9 @@
     </transition-group>
 
     <div id="btt" class="fixed w-full bottom-5 right-5 z-10 cursor-pointer text-white text-6xl flex justify-end">
+      <i v-show="pendingRequest"
+         class="fa fa-spinner fa-spin"
+      />
       <i v-show="!isTop"
          class="fa fa-arrow-up"
          @click.prevent="backToTop"
@@ -77,15 +80,10 @@
 <script>
 import AppBlogItem from '@/components/Blogs/BlogItem.vue';
 import { filesCollection } from '@/includes/firebase';
-import { mapState } from 'vuex';
-
 
 export default {
   name: 'Blogs',
   components: {
-    ...mapState({
-      userLoggedIn: (state) => state.auth.userLoggedIn,
-    }),
     AppBlogItem,
   },
   data() {
@@ -160,9 +158,8 @@ export default {
       this.filterByType = val;
     },
     handleScroll() {
-      const { scrollTop, offsetHeight } = document.documentElement;
-      const { innerHeight } = window;
-      const bottomOfWindow = Math.round(scrollTop) + innerHeight === offsetHeight;
+      const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+      const bottomOfWindow = Math.round(scrollTop) + clientHeight === scrollHeight;
 
       this.isTop = scrollTop === 0;
 
@@ -181,8 +178,6 @@ export default {
     this.getFiles();
 
     window.addEventListener('scroll', this.handleScroll);
-  },
-  mounted() {
   },
   beforeUnmount() {
     window.removeEventListener('scroll', this.handleScroll);

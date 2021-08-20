@@ -1,9 +1,9 @@
 <template>
   <div class="border border-gray-200 p-3 mb-4 rounded">
     <div v-show="!showForm">
-      <h4 class="inline-block text-2xl font-bold">{{ file.modified_name }}</h4>
+      <h4 class="inline-block text-2xl font-bold">{{ image.modified_name }}</h4>
       <button class="ml-1 py-1 px-2 text-sm rounded text-white bg-red-600 float-right"
-              @click.prevent="deleteFile"
+              @click.prevent="deleteImage"
       >
         <i :class="icon_variant"></i>
       </button>
@@ -18,7 +18,7 @@
            v-if="show_alert" :class="alert_variant">
         {{ alert_msg }}
       </div>
-      <vee-form :validation-schema="schema" :initial-values="file"
+      <vee-form :validation-schema="schema" :initial-values="image"
                 @submit="edit"
       >
         <div class="mb-3">
@@ -26,30 +26,10 @@
           <vee-field type="text" name="modified_name"
                      class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300
                         transition duration-500 focus:outline-none focus:border-black rounded"
-                     placeholder="Enter File Title"
+                     placeholder="Enter Image Title"
                      @input="updateUnsavedFlag(true)"
           />
           <ErrorMessage name="modified_name" class="text-red-600" />
-        </div>
-        <div class="mb-3">
-          <label class="inline-block mb-2">Type</label>
-          <vee-field type="text" name="type"
-                     class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300
-                        transition duration-500 focus:outline-none focus:border-black rounded"
-                     placeholder="Enter Type"
-                     @input="updateUnsavedFlag(true)"
-          />
-          <ErrorMessage name="type" class="text-red-600" />
-        </div>
-        <div class="mb-3">
-          <label class="inline-block mb-2">Type</label>
-          <vee-field type="text" name="compendium"
-                     class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300
-                        transition duration-500 focus:outline-none focus:border-black rounded"
-                     placeholder="Edit Compendium"
-                     @input="updateUnsavedFlag(true)"
-          />
-          <ErrorMessage name="compendium" class="text-red-600" />
         </div>
         <button type="submit" class="py-1.5 px-3 rounded text-white bg-green-600"
                 @disable="in_submission"
@@ -67,16 +47,16 @@
 </template>
 
 <script>
-import { filesCollection, storage } from '@/includes/firebase';
+import { imagesCollection, storage } from '@/includes/firebase';
 
 export default {
   name: 'compositionItem',
   props: {
-    file: {
+    image: {
       type: Object,
       required: true,
     },
-    updateFile: {
+    updateImage: {
       type: Function,
       required: true,
     },
@@ -84,13 +64,17 @@ export default {
       type: Number,
       required: true,
     },
-    removeFile: {
+    removeImage: {
       type: Function,
       required: true,
     },
     updateUnsavedFlag: {
       type: Function,
     },
+    album: {
+      type: String,
+      required: true,
+    }
   },
   data() {
     return {
@@ -102,7 +86,7 @@ export default {
       in_submission: false,
       show_alert: false,
       alert_variant: 'bg-blue-500',
-      alert_msg: 'Please wait! Updating file info.',
+      alert_msg: 'Please wait! Updating image info.',
       icon_variant: 'fa fa-times',
     };
   },
@@ -111,10 +95,10 @@ export default {
       this.in_submission = true;
       this.show_alert = true;
       this.alert_variant = 'bg-blue-500';
-      this.alert_msg = 'Please wait! Updating file info.';
+      this.alert_msg = 'Please wait! Updating image info.';
 
       try {
-        await filesCollection.doc(this.file.docID).update(values);
+        await imagesCollection.doc(this.image.docID).update(values);
       } catch (error) {
         this.in_submission = false;
         this.alert_variant = 'bg-red-500';
@@ -122,7 +106,7 @@ export default {
         return;
       }
 
-      this.updateFile(this.index, values);
+      this.updateImage(this.index, values);
       this.updateUnsavedFlag(false);
 
       this.in_submission = false;
@@ -134,15 +118,15 @@ export default {
         this.showForm = false;
       }, 2000);
     },
-    async deleteFile() {
+    async deleteImage() {
       this.icon_variant = 'fa fa-spinner fa-spin';
       const storageRef = storage.ref();
-      const fileRef = storageRef.child(`BlogFiles/${this.file.original_name}`);
-      await fileRef.delete();
+      const imageRef = storageRef.child(`Images/${this.album}/${this.image.original_name}`);
+      await imageRef.delete();
 
-      await filesCollection.doc(this.file.docID).delete();
+      await imagesCollection.doc(this.image.docID).delete();
 
-      this.removeFile(this.index);
+      this.removeImage(this.index);
     },
   },
 };

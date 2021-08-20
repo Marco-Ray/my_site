@@ -1,27 +1,42 @@
 <template>
   <section class="container mx-auto mt-6">
-    <router-link to="/">
+    <router-link to="/portfolio">
       <i class="fa fa-times absolute text-white text-6xl top-0 right-0"></i>
     </router-link>
     <div class="md:grid md:grid-cols-3 md:gap-4">
       <div class="col-span-1">
-        <app-upload :getFiles="getFiles"
-                    :updateUnfinishedFlag="updateUnfinishedFlag" />
+        <div class="bg-white list-none w-full h-10 inline-flex justify-evenly items-center">
+          <a href="#" @click.prevent="activeAlbum = '1'"
+             :class="{ 'bg-blue-500 p-2':activeAlbum === '1' }"
+          >
+            CoCo
+          </a>
+          <a href="#" @click.prevent="activeAlbum = '2'"
+             :class="{ 'bg-blue-500 p-2':activeAlbum === '2' }"
+          >
+            Photograph
+          </a>
+        </div>
+        <app-upload :getImages="getImages"
+                    :updateUnfinishedFlag="updateUnfinishedFlag"
+                    :album="album"
+        />
       </div>
       <div class="col-span-2">
         <div class="bg-white rounded border border-gray-200 relative flex flex-col">
           <div class="px-6 pt-6 pb-5 font-bold border-b border-gray-200">
-            <span class="card-title">My Markdown Files</span>
+            <span class="card-title">My Images</span>
             <i class="fa fa-compact-disc float-right text-green-400 text-2xl"></i>
           </div>
           <div class="p-6">
             <!-- Composition Items-->
-            <composition-item v-for="(file, i) in files" :key="file.docID"
-                              :file="file"
-                              :updateFile="updateFile"
+            <composition-item v-for="(image, i) in images" :key="image.docID"
+                              :image="image"
+                              :updateImage="updateImage"
                               :index="i"
-                              :removeFile="removeFile"
+                              :removeImage="removeImage"
                               :updateUnsavedFlag="updateUnsavedFlag"
+                              :album="album"
             />
           </div>
         </div>
@@ -32,9 +47,9 @@
 
 <script>
 // import store from '@/store';
-import AppUpload from '@/components/BlogManage/Upload.vue';
-import CompositionItem from '@/components/BlogManage/CompositionItem.vue';
-import { filesCollection, auth } from '@/includes/firebase';
+import AppUpload from '@/components/ImageManage/Upload.vue';
+import CompositionItem from '@/components/ImageManage/CompositionItem.vue';
+import { imagesCollection, auth } from '@/includes/firebase';
 
 
 export default {
@@ -45,34 +60,39 @@ export default {
   },
   data() {
     return {
-      files: [],
+      images: [],
       unsavedFlag: false,
       unfinishedFlag: false,
+      activeAlbum: '2'
     };
   },
+  computed: {
+    album() {
+      return this.activeAlbum === '1' ? 'CoCo' : 'Photograph'
+    }
+  },
   created() {
-    this.getFiles();
+    this.getImages();
   },
   methods: {
-    updateFile(i, values) {
-      this.files[i].modified_name = values.modified_name;
-      this.files[i].genre = values.genre;
+    updateImage(i, values) {
+      this.images[i].modified_name = values.modified_name;
     },
-    async getFiles() {
-      const snapshots = await filesCollection
+    async getImages() {
+      const snapshots = await imagesCollection
         .where('uid', '==', auth.currentUser.uid).get();
 
-      this.files = [];
+      this.images = [];
 
       snapshots.forEach((doc) => [
-        this.files.push({
+        this.images.push({
           docID: doc.id,
           ...doc.data(),
         }),
       ]);
     },
-    removeFile(i) {
-      this.files.splice(i, 1);
+    removeImage(i) {
+      this.images.splice(i, 1);
     },
     updateUnsavedFlag(value) {
       this.unsavedFlag = value;
@@ -90,20 +110,9 @@ export default {
       next(leave);
     } else if (this.unfinishedFlag) {
       // eslint-disable-next-line no-restricted-globals, no-alert
-      const leave = confirm('The files are still uploading, leaving will cancel the tasks. Do you want to leave anyway?');
+      const leave = confirm('The images are still uploading, leaving will cancel the tasks. Do you want to leave anyway?');
       next(leave);
     }
   },
-  // beforeRouteLeave(to, from, next) {
-  //   this.$refs.upload.cancelUploads();
-  //   next();
-  // },
-  // beforeRouteEnter(to, from, next) {
-  //   if (store.state.userLoggedIn) {
-  //     next();
-  //   } else {
-  //     next({ name: 'home' });
-  //   }
-  // },
 };
 </script>
