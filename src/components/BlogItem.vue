@@ -53,16 +53,7 @@ export default {
       }
     },
     filterByClick() {
-      switch(this.blog.type) {
-        case 'Tech':
-          this.$emit('filterByClick', '2');
-          break;
-        case 'Art':
-          this.$emit('filterByClick', '3');
-          break;
-        default:
-          this.$emit('filterByClick', '1');
-      }
+      this.$emit('filterByClick', this.blog.type);
     }
   },
 };

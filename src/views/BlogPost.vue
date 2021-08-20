@@ -52,6 +52,8 @@ export default {
         vm.$router.push({ name: 'Blogs' });
       }
     });
+
+    console.log(this.url)
   }
 };
 </script>

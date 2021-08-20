@@ -22,9 +22,8 @@
                 class="inline-block mt-4 py-1.5 px-3 text-gray-800 border border-gray-300
                 transition duration-500 focus:outline-none focus:border-black rounded"
         >
-          <option value="1">All</option>
-          <option value="2">Tech</option>
-          <option value="3">Art</option>
+          <option value="All">All</option>
+          <option v-for="type in types" :key="type">{{ type }}</option>
         </select>
       </div>
 
@@ -66,7 +65,6 @@
 <script>
 import AppBlogItem from '@/components/BlogItem.vue';
 import { filesCollection } from '@/includes/firebase';
-// import jsonFiles from '../../public/md_files.json';
 
 
 export default {
@@ -78,7 +76,7 @@ export default {
     return {
       blogs: [],
       blogs_filtered: [],
-      filterByType: '1',
+      filterByType: 'All',
       sortByTime: '1',
       isTop: true,
       maxPerPage: 10,
@@ -89,11 +87,18 @@ export default {
     sortedBlogs() {
       return this.blogs_filtered.slice().sort((a,b) => {
         if (this.sortByTime === '1') {
-          return new Date(b.date) - new Date(a.date);
+          return new Date(b.datePosted) - new Date(a.datePosted);
         }
-        return new Date(a.date) - new Date(b.date);
+        return new Date(a.datePosted) - new Date(b.datePosted);
       });
     },
+    types() {
+      const typeList = [];
+      this.blogs.forEach((blog) => {
+        typeList.push(blog.type)
+      });
+      return typeList
+    }
   },
   methods: {
     async getFiles() {
@@ -133,7 +138,7 @@ export default {
     },
     reset() {
       this.sortByTime = '1';
-      this.filterByType = '1';
+      this.filterByType = 'All';
     },
     filterByClick(val) {
       this.filterByType = val;
@@ -156,7 +161,7 @@ export default {
       });
     }
   },
-  async created() {
+  created() {
     this.getFiles();
 
     window.addEventListener('scroll', this.handleScroll);
@@ -170,13 +175,8 @@ export default {
     filterByType:{
       handler(newVal) {
         this.blogs_filtered = this.blogs.filter(blog => {
-            if (newVal === '2') {
-              return blog.type === 'Tech';
-            } else if (newVal === '3') {
-              return blog.type === 'Art';
-            }
-            return blog.type;
-          });
+          return (newVal === 'All') ? true : (blog.type === newVal)
+        });
       },
       immediate: true
     }
