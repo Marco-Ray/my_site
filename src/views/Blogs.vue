@@ -63,7 +63,7 @@
 </template>
 
 <script>
-import AppBlogItem from '@/components/BlogItem.vue';
+import AppBlogItem from '@/components/Blogs/BlogItem.vue';
 import { filesCollection } from '@/includes/firebase';
 
 

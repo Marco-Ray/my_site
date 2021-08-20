@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import MarkDownPage from '@/components/MarkDownPage';
+import MarkDownPage from '@/components/Blogs/MarkDownPage';
 import { filesCollection } from '@/includes/firebase';
 
 export default {

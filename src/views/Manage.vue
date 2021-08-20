@@ -32,9 +32,10 @@
 
 <script>
 // import store from '@/store';
-import AppUpload from '@/components/Upload.vue';
+import AppUpload from '@/components/Manage/Upload.vue';
+import CompositionItem from '@/components/Manage/CompositionItem.vue';
 import { filesCollection, auth } from '@/includes/firebase';
-import CompositionItem from '@/components/CompositionItem.vue';
+
 
 export default {
   name: 'Manage',

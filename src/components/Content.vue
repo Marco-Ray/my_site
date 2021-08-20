@@ -12,9 +12,18 @@
                 <p><span class="text-red-500"> Zehuan</span> Wang</p>
               </div>
             </div>
-            <p class="text-white pt-6 max-w-prose">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
-              praesentium voluptatum deleniti atque corrupti quos dolores et quas
-              molestias excepturi sint occaecati cupiditate non provident.</p>
+            <div class="text-white text-lg pt-6 max-w-prose m-0">
+              <p>
+                Do not go gentle into that good night,
+                <br />
+                Old age should burn and rave at close of day;
+                <br />
+                Rage, rage against the dying of the light.
+              </p>
+              <br />
+              <div class="text-white">-- Dylan Thomas</div>
+            </div>
+
           </div>
         </transition>
       </div>
