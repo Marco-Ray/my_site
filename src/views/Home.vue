@@ -7,8 +7,8 @@
 
 <script>
 // @ is an alias to /src
-import AppHeader from '@/components/Header.vue';
-import AppContent from '@/components/Content.vue';
+import AppHeader from '@/components/Home/Header.vue';
+import AppContent from '@/components/Home/Content.vue';
 
 
 export default {

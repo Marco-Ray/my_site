@@ -27,7 +27,7 @@ export default {
 <style lang="scss">
 #nprogress .bar {
   background: red !important; //自定义颜色
-  height: 50px;
+  height: 10px;
 }
 
 </style>

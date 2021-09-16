@@ -29,14 +29,19 @@
       </div>
     </transition>
     <transition class="animate__animated animate__fadeInUp animate__delay-1s">
-      <button class="px-5 py-2 bg-red-500 text-white rounded-sm">Download CV</button>
+      <button class="px-5 py-2 bg-red-500 text-white rounded-sm" @click="downloadCV">Download CV</button>
     </transition>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Content'
+  name: 'Content',
+  methods: {
+    downloadCV() {
+      alert('Coming Soon')
+    }
+  }
 };
 </script>
 

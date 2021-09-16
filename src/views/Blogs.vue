@@ -27,7 +27,7 @@
         </select>
 
         <router-link class="text-white" :to="{ name: 'BlogManage'}">
-          <svg class="w-10 h-10 fill-current" viewBox="0 0 1024 1024"
+          <svg class="w-10 h-10 fill-current fa-spin" viewBox="0 0 1024 1024"
                xmlns="http://www.w3.org/2000/svg">
             <path d="M512 486.4c-83.2 0-153.6-70.4-153.6-153.6 0-83.2 70.4-153.6 153.6-153.6 83.2 0 153.6 70.4 153.6 153.6 6.4 83.2-64 153.6-153.6 153.6z m0-288c-76.8 0-134.4 64-134.4 134.4s64 134.4 134.4 134.4c76.8 0 134.4-64 134.4-134.4S588.8 198.4 512 198.4z"></path>
             <path d="M518.4 332.8m-96 0a96 96 0 1 0 192 0 96 96 0 1 0-192 0Z"></path>
