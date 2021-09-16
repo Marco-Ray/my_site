@@ -20,8 +20,9 @@
                 <br />
                 Rage, rage against the dying of the light.
               </p>
-              <br />
-              <div class="text-white">-- Dylan Thomas</div>
+              <div class="flex justify-end">
+                <div class="text-white">-- Dylan Thomas</div>
+              </div>
             </div>
 
           </div>

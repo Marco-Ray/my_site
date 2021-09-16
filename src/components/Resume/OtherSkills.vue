@@ -22,6 +22,7 @@ export default {
   data() {
     return {
       skills: {
+        Badminton: { name: 'Badminton', degree: '70%'},
         Guitar: { name: 'Guitar', degree: '20%' },
         Bass: { name: 'Bass', degree: '5%' }
       }
