@@ -36,7 +36,7 @@
             <p class="text-red-500"><span class="text-xl text-white">A face detector implemented by three different ways</span> - Chengdu China</p>
             <ul class="content hidden lg:block">
               <li>
-                Collected 3450 postive samples of face and 9000 negative samples.
+                Collected 3450 positive samples of face and 9000 negative samples.
               </li>
               <li>
                 Implemented a Gaussian skin color normalized probability model to detect face using the matlab library facepartdetect as baseline.

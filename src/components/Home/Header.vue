@@ -30,7 +30,6 @@
             <div id="logo"
               class="text-white text-2xl font-bold
               lg:text-3xl"
-                 @click.prevent="toggleAuthModal"
             >
               Zehuan Wang
             </div>

@@ -40,6 +40,10 @@ export default {
     text-align: center;
     border-radius: 3px;
   }
+
+  .progress-bar {
+    margin-bottom: 50px;
+  }
 }
 
 </style>
