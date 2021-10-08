@@ -96,7 +96,7 @@ export default {
       this.tasksUploading = files.length;
 
       files.forEach((file) => {
-        if (file.type !== 'image/jpeg') {
+        if (file.type !== 'image/jpeg' && file.type !== 'image/gif') {
           return;
         }
 
@@ -137,13 +137,25 @@ export default {
           this.tasksUploading -= 1;
           this.upload_show_alert = true;
         }, async () => {
-          const image = {
-            uid: auth.currentUser.uid,
-            original_name: task.snapshot.ref.name,
-            modified_name: task.snapshot.ref.name,
-            album: this.album,
-            datePosted: new Date().toString(),
-          };
+          let image;
+          if (this.album !== 'Processing') {
+            image = {
+              uid: auth.currentUser.uid,
+              original_name: task.snapshot.ref.name,
+              modified_name: task.snapshot.ref.name,
+              album: this.album,
+              datePosted: new Date().toString(),
+            };
+          } else {
+            image = {
+              uid: auth.currentUser.uid,
+              original_name: task.snapshot.ref.name,
+              modified_name: task.snapshot.ref.name,
+              album: this.album,
+              datePosted: new Date().toString(),
+              link: 'XXX',
+            };
+          }
 
           image.url = await task.snapshot.ref.getDownloadURL();
           await imagesCollection.add(image);

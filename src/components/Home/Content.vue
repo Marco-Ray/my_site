@@ -36,12 +36,33 @@
 </template>
 
 <script>
+import { storage } from "@/includes/firebase";
+
 export default {
   name: 'Content',
+  data() {
+    return {
+      CVURL: ''
+    }
+  },
+  created() {
+    // this.getCVURL();
+  },
   methods: {
     downloadCV() {
-      alert('Coming Soon')
-    }
+      // window.location.href = this.CVURL;
+      alert('Coming soon');
+    },
+    // async getCVURL() {
+    //   const storageRef = storage.ref();
+    //   storageRef.child('CV/CV-Zehuan_Wang-20210923.doc').getDownloadURL()
+    //     .then((url) => {
+    //       this.CVURL = url;
+    //     })
+    //     .catch((error) => {
+    //       return error
+    //     });
+    // }
   }
 };
 </script>

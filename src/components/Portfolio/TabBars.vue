@@ -1,20 +1,16 @@
 <template>
   <nav class="shadow">
     <div class="container flex items-center justify-center p-6 mx-auto text-white capitalize">
-      <a href="#"
-         class="border-b-2 border-transparent px-3 sm:mx-6"
-         :class="{ 'border-red-500 text-red-500': tabActive===1, 'hover:text-red-500': tabActive!==1 }"
-         @click.prevent="tabActive=1"
-      >
-        CoCo
-      </a>
 
-      <a href="#"
-         class="border-b-2 border-transparent px-3 sm:mx-6"
-         :class="{ 'border-red-500 text-red-500': tabActive===2, 'hover:text-red-500': tabActive!==2 }"
-         @click.prevent="tabActive=2"
+      <a
+        v-for="tab in tabLists"
+        :key="tab.id"
+        href="#"
+        class="border-b-2 border-transparent px-3 sm:mx-6"
+        :class="{ 'border-red-500 text-red-500': tabActive===tab.id, 'hover:text-red-500': tabActive!==tab.id }"
+        @click.prevent="tabActive=tab.id"
       >
-        Photograph
+        {{ tab.title }}
       </a>
 
       <a href="#" class="border-b-2 border-transparent mx-1.5 sm:mx-6">
@@ -35,17 +31,20 @@ export default {
   name: 'TabBars',
   data() {
     return {
-      tabActive: 1,
+      tabActive: 0,
+      tabLists: [
+        { id: 0,
+          title: 'CoCo'},
+        { id: 1,
+          title:'Photograph'},
+        { id: 2,
+          title: 'Processing'}
+      ]
     }
   },
   watch: {
     tabActive(newVal) {
-      if (newVal===1) {
-        this.$emit('toggleAlbum', 'CoCo')
-      } else {
-        this.$emit('toggleAlbum', 'Photograph')
-      }
-
+      this.$emit('toggleAlbum', this.tabLists[newVal].title)
     }
   }
 };

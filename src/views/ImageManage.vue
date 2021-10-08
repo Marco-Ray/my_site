@@ -5,16 +5,16 @@
     </router-link>
     <div class="md:grid md:grid-cols-3 md:gap-4">
       <div class="col-span-1">
-        <div class="bg-white list-none w-full h-10 inline-flex justify-evenly items-center">
-          <a href="#" @click.prevent="activeAlbum = '1'"
-             :class="{ 'bg-blue-500 p-2':activeAlbum === '1' }"
+        <div class="bg-white list-none w-full inline-flex flex-wrap gap-3 items-center">
+          <a
+            v-for="tab in tabLists"
+            :key="tab.id"
+            href="#"
+            @click.prevent="activeAlbum = tab.id"
+            class="ml-5"
+            :class="{ 'bg-blue-500 p-2':activeAlbum === tab.id }"
           >
-            CoCo
-          </a>
-          <a href="#" @click.prevent="activeAlbum = '2'"
-             :class="{ 'bg-blue-500 p-2':activeAlbum === '2' }"
-          >
-            Photograph
+            {{ tab.title }}
           </a>
         </div>
         <app-upload :getImages="getImages"
@@ -63,12 +63,20 @@ export default {
       images: [],
       unsavedFlag: false,
       unfinishedFlag: false,
-      activeAlbum: '2'
+      activeAlbum: 1,
+      tabLists: [
+        { id: 0,
+          title: 'CoCo' },
+        { id: 1,
+          title: 'Photograph' },
+        { id: 2,
+          title: 'Processing' }
+      ]
     };
   },
   computed: {
     album() {
-      return this.activeAlbum === '1' ? 'CoCo' : 'Photograph'
+      return this.tabLists[this.activeAlbum].title
     }
   },
   created() {

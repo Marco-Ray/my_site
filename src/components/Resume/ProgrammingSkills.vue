@@ -6,7 +6,7 @@
 
     <div class="progress-bar">
       <div v-for="skill in skills" :key="skill.name">
-        <h1 class="pt-2 sm:pt-5 text-white pt-5 ">{{ skill.name }} <span class="text-xs text-red-500">{{ skill.degree }}</span></h1>
+        <h1 class="pt-2 sm:pt-5 text-white pt-5 ">{{ skill.name }} <span class="text-s text-red-500">{{ skill.degree }}</span></h1>
         <div class="mt-2 h-4 relative w-full rounded-full overflow-hidden">
           <div class=" w-full h-full bg-gray-200 absolute"></div>
           <div class=" h-full bg-red-500 absolute" :style="{width: skill.degree}"></div>
@@ -23,7 +23,8 @@ export default {
     return {
       skills: {
         Python: { name: 'Python', degree: '70%' },
-        Vue: { name: 'Vue', degree: '50%' }
+        Vue: { name: 'HTML/CSS/JS/Vue', degree: '50%' },
+        Java: { name: 'Java', degree: '30%' }
       }
     }
   }

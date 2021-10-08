@@ -1,8 +1,8 @@
 <template>
   <transition class="animate__animated animate__fadeIn">
-    <nav id="nav" class="bg-black relative lg:fixed w-full shadow-lg lg:bg-transparent">
-    <div class="container pt-8 pb-2 mx-auto lg:flex lg:justify-between lg:items-center">
-        <div class="lg:flex lg:items-center">
+    <nav id="nav" class="bg-black relative xl:fixed w-full shadow-xl xl:bg-transparent">
+    <div class="container pt-8 pb-2 mx-auto xl:flex xl:justify-between xl:items-center">
+        <div class="xl:flex xl:items-center">
           <div class="flex items-center justify-between">
             <div class="mr-3 flex cursor-pointer">
               <div v-if="!userLoggedIn">
@@ -29,13 +29,13 @@
             </div>
             <div id="logo"
               class="text-white text-2xl font-bold
-              lg:text-3xl"
+              xl:text-3xl"
             >
               Zehuan Wang
             </div>
 
             <!-- Mobile menu button -->
-            <div class="flex lg:hidden">
+            <div class="flex xl:hidden">
               <button type="button" class="text-white focus:text-gray-600" aria-label="toggle menu" @click.prevent="isOpen = !isOpen">
                 <svg viewBox="0 0 24 24" class="w-6 h-6 fill-current">
                   <path fill-rule="evenodd"
@@ -48,7 +48,7 @@
           </div>
 
           <div class="flex-col text-white capitalize pt-10 divide-solid divide-y divide-white divide-opacity-20
-          lg:flex lg:px-24 lg:-mx-4 lg:gap-0 lg:pt-0 lg:flex-row lg:items-center lg:divide-none"
+          xl:flex xl:px-24 xl:-mx-4 xl:gap-0 xl:pt-0 xl:flex-row xl:items-center xl:divide-none"
                :class="{ 'hidden': !isOpen, 'flex': isOpen}"
           >
             <router-link to="/resume" :class="navItemStyle">Resume</router-link>
@@ -60,7 +60,7 @@
           </div>
         </div>
 
-        <div class="flex justify-center mt-3 pb-1 lg:pb-0 lg:flex lg:mt-0 transform hover:cursor-pointer">
+        <div class="flex justify-center mt-3 pb-1 xl:pb-0 xl:flex xl:mt-0 transform hover:cursor-pointer">
           <a href="https://www.linkedin.com/in/zehuan-wang-58bb061a1" target="_blank" class="mx-2 text-gray-600 dark:text-gray-300
           hover:text-gray-500 dark:hover:text-gray-300" aria-label="LinkedIn">
             <svg class="w-6 h-6 fill-current" viewBox="0 0 1024 1024"
@@ -108,7 +108,7 @@ export default {
   data() {
     return {
       isOpen: false,
-      navItemStyle: "lg:mt-0 lg:mx-3 flex-auto px-2 py-2 rounded-sm lg:py-4 " +
+      navItemStyle: "xl:mt-0 xl:mx-3 flex-auto px-2 py-2 rounded-sm xl:py-4 " +
         "transition-colors duration-500 transform hover:bg-gray-300 hover:bg-opacity-30 hover:cursor-pointer",
     }
   },
