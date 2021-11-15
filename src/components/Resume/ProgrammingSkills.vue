@@ -4,7 +4,7 @@
       Programming Skills
     </div>
 
-    <div class="progress-bar">
+    <div class="progress-bar wow animate__fadeInLeft">
       <div v-for="skill in skills" :key="skill.name">
         <h1 class="pt-2 sm:pt-5 text-white pt-5 ">{{ skill.name }} <span class="text-s text-red-500">{{ skill.degree }}</span></h1>
         <div class="mt-2 h-4 relative w-full rounded-full overflow-hidden">
@@ -24,7 +24,9 @@ export default {
       skills: {
         Python: { name: 'Python', degree: '70%' },
         Vue: { name: 'HTML/CSS/JS/Vue', degree: '50%' },
-        Java: { name: 'Java', degree: '30%' }
+        Java: { name: 'Java', degree: '30%' },
+        Matlab: { name: 'Matlab', degree: '30%' },
+        Pytorch_TF: { name: 'Pytorch/TensorFlow', degree: '30%'}
       }
     }
   }

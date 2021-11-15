@@ -30,6 +30,7 @@
       <image-card v-for="img in sortedImages"
                   :key="img.docID"
                   :img="img"
+                  :showName="showName"
       />
     </transition-group>
 
@@ -75,6 +76,9 @@ export default {
         return new Date(a.datePosted) - new Date(b.datePosted);
       });
     },
+    showName() {
+      return (this.album === 'Processing') ? true : false
+    }
   },
   methods: {
     toggleAlbum(val) {

@@ -4,7 +4,7 @@
       Other Skills
     </div>
 
-    <div class="progress-bar">
+    <div class="progress-bar wow animate__fadeInRight">
       <div v-for="skill in skills" :key="skill.name">
         <h1 class="pt-2 sm:pt-5 text-white pt-5 ">{{ skill.name }} <span class="text-s text-red-500">{{ skill.degree }}</span></h1>
         <div class="mt-2 h-4 relative w-full rounded-full overflow-hidden">

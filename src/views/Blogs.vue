@@ -111,7 +111,8 @@ export default {
       this.blogs.forEach((blog) => {
         typeList.push(blog.type)
       });
-      return typeList
+      let x = new Set(typeList);
+      return [...x]
     }
   },
   methods: {

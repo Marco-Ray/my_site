@@ -96,7 +96,7 @@ export default {
       this.tasksUploading = files.length;
 
       files.forEach((file) => {
-        if (file.type !== 'image/jpeg' && file.type !== 'image/gif') {
+        if (file.type !== 'image/jpeg' && file.type !== 'image/gif' && file.type !== 'image/png') {
           return;
         }
 
