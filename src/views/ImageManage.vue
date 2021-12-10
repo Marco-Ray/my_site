@@ -1,5 +1,5 @@
 <template>
-  <section class="container mx-auto mt-6">
+  <section class="container mx-auto mt-20">
     <router-link to="/portfolio">
       <i class="fa fa-times absolute text-white text-6xl top-0 right-0"></i>
     </router-link>
