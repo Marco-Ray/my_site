@@ -22,7 +22,7 @@
     </div>
 
     <!--    Image Container-->
-    <transition-group tag="ol" class="cards_container w-246 flex flex-wrap justify-start" name="flip"
+    <transition-group tag="ol" class="cards_container w-246 mb-20 flex flex-wrap justify-start" name="flip"
                       enter-active-class="animate__animated animate__zoomIn"
                       move-class="transition duration-1000 linear"
                       mode="out-in"
@@ -30,15 +30,16 @@
       <image-card v-for="img in sortedImages"
                   :key="img.docID"
                   :img="img"
+                  :showName="showName"
       />
     </transition-group>
 
-    <div id="btt" class="fixed w-full bottom-5 right-5 z-10 cursor-pointer text-white text-6xl flex justify-end">
+    <div id="btt" class="fixed w-full bottom-5 z-10 cursor-pointer text-white text-6xl flex justify-center">
       <i v-show="pendingRequest"
         class="fa fa-spinner fa-spin"
       />
       <i v-show="!isTop"
-         class="fa fa-arrow-up"
+         class="absolute fa fa-arrow-up right-5 bottom-0"
          @click.prevent="backToTop"
       />
     </div>
@@ -75,6 +76,9 @@ export default {
         return new Date(a.datePosted) - new Date(b.datePosted);
       });
     },
+    showName() {
+      return (this.album === 'Processing') ? true : false
+    }
   },
   methods: {
     toggleAlbum(val) {

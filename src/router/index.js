@@ -21,18 +21,18 @@ const routes = [
       leave: 'animate__animated animate__fadeOut',
     },
   },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: About,
-    meta: {
-      enter: 'animate__animated animate__fadeIn ',
-      leave: 'animate__animated animate__fadeOut',
-    },
-  },
+  // {
+  //   path: '/about',
+  //   name: 'About',
+  //   // route level code-splitting
+  //   // this generates a separate chunk (about.[hash].js) for this route
+  //   // which is lazy-loaded when the route is visited.
+  //   component: About,
+  //   meta: {
+  //     enter: 'animate__animated animate__fadeIn ',
+  //     leave: 'animate__animated animate__fadeOut',
+  //   },
+  // },
   {
     path: '/resume',
     name: 'Resume',
@@ -95,16 +95,16 @@ const routes = [
       leave: 'animate__animated animate__fadeOut',
     },
   },
-  {
-    path: '/contact',
-    name: 'Contact',
-    component: Contact,
-    // meta: { transition: 'left-slide' },
-    meta: {
-      enter: 'animate__animated animate__fadeIn ',
-      leave: 'animate__animated animate__fadeOut',
-    },
-  },
+  // {
+  //   path: '/contact',
+  //   name: 'Contact',
+  //   component: Contact,
+  //   // meta: { transition: 'left-slide' },
+  //   meta: {
+  //     enter: 'animate__animated animate__fadeIn ',
+  //     leave: 'animate__animated animate__fadeOut',
+  //   },
+  // },
   {
     path: '/:catchAll(.*)*',
     redirect: { name: 'Home' },

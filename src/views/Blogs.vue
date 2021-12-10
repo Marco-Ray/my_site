@@ -49,7 +49,7 @@
     </div>
 
     <!--  Blog List-->
-    <transition-group tag="ol" class="gap-10 w-10/12" name="flip"
+    <transition-group tag="ol" class="gap-10 w-10/12 mb-20" name="flip"
                       enter-active-class="animate__animated animate__flipInX"
                       leave-active-class="animate__animated animate__flipOutX "
                       move-class="transition duration-1000 linear"
@@ -64,12 +64,12 @@
       />
     </transition-group>
 
-    <div id="btt" class="fixed w-full bottom-5 right-5 z-10 cursor-pointer text-white text-6xl flex justify-end">
+    <div id="btt" class="fixed w-full bottom-5 z-10 cursor-pointer text-white text-6xl flex justify-center">
       <i v-show="pendingRequest"
          class="fa fa-spinner fa-spin"
       />
       <i v-show="!isTop"
-         class="fa fa-arrow-up"
+         class="fa fa-arrow-up absolute right-5 bottom-0"
          @click.prevent="backToTop"
       />
     </div>
@@ -111,7 +111,8 @@ export default {
       this.blogs.forEach((blog) => {
         typeList.push(blog.type)
       });
-      return typeList
+      let x = new Set(typeList);
+      return [...x]
     }
   },
   methods: {

@@ -24,7 +24,9 @@ export default {
       skills: {
         Python: { name: 'Python', degree: '70%' },
         Vue: { name: 'HTML/CSS/JS/Vue', degree: '50%' },
-        Java: { name: 'Java', degree: '30%' }
+        Java: { name: 'Java', degree: '30%' },
+        Matlab: { name: 'Matlab', degree: '30%' },
+        Pytorch_TF: { name: 'Pytorch/TensorFlow', degree: '30%'}
       }
     }
   }
