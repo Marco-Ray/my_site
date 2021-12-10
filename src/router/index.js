@@ -126,6 +126,7 @@ router.beforeEach((to, from, next) => {
   if (store.state.auth.userLoggedIn) {
     next();
   } else {
+    alert('Please Login First.');
     next({ name: 'Home' });
   }
 });

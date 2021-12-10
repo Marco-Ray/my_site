@@ -27,6 +27,8 @@ import ResearchTimeLine from '@/components/Resume/ResearchTimeLine.vue';
 import CourseworkTimeLine from '@/components/Resume/CourseworkTimeLine.vue';
 import ProgrammingSkills from '@/components/Resume/ProgrammingSkills.vue';
 import OtherSkills from '@/components/Resume/OtherSkills.vue';
+import { WOW } from 'wowjs';
+
 
 export default {
   name: 'Resume',
@@ -37,6 +39,13 @@ export default {
     ResearchTimeLine,
     CourseworkTimeLine,
     OtherSkills
+  },
+  mounted() {
+    this.$nextTick(() => {
+      new WOW({
+        animateClass: 'animate__animated'
+      }).init()
+    })
   }
 }
 </script>

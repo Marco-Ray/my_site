@@ -4,7 +4,7 @@
       Awards & Honors
     </div>
 
-    <div class="section-list">
+    <div class="section-list wow animate__fadeInRight">
       <div class="block w-1 bg-red-500 absolute h-full transform -translate-x-1/2"></div>
 
       <ul>
