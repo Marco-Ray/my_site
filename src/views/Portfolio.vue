@@ -61,7 +61,7 @@ export default {
     return {
       imgs: [],
       album: 'CoCo',
-      sortByTime: '1',
+      sortByTime: '2',
       isTop: true,
       maxPerPage: 9,
       pendingRequest: false,
@@ -101,14 +101,14 @@ export default {
           .get();
         snapshots = await imagesCollection
           .where('album', '==', this.album)
-          .orderBy('modified_name')
+          .orderBy('timeStampPosted')
           .startAfter(lastDoc)
           .limit(this.maxPerPage)
           .get();
       } else {
         snapshots = await imagesCollection
           .where('album', '==', this.album)
-          .orderBy('modified_name')
+          .orderBy('timeStampPosted')
           .limit(this.maxPerPage)
           .get();
       }

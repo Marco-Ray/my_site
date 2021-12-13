@@ -145,6 +145,7 @@ export default {
               modified_name: task.snapshot.ref.name,
               album: this.album,
               datePosted: new Date().toString(),
+              timeStampPosted: (new Date()).getTime().toString(),
             };
           } else {
             image = {
@@ -153,6 +154,7 @@ export default {
               modified_name: task.snapshot.ref.name,
               album: this.album,
               datePosted: new Date().toString(),
+              timeStampPosted: (new Date()).getTime().toString(),
               link: 'XXX',
             };
           }
