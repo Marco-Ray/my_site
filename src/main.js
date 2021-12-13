@@ -24,6 +24,8 @@ import '@kangc/v-md-editor/lib/plugins/emoji/emoji.css';
 import Prism from 'prismjs';
 // highlight code
 import 'prismjs/components/prism-json';
+// Particles.vue3
+import Particles from "particles.vue3";
 
 VMdPreview.use(vuepressTheme, {
   Prism,
@@ -53,6 +55,7 @@ auth.onAuthStateChanged(() => {
     app.use(VueAxios, axios);
     app.use(VMdPreview);
     app.use(VeeValidatePlugin);
+    app.use(Particles);
 
     app.mount('#app');
   }

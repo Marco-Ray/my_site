@@ -22,6 +22,7 @@
     "lodash": "^4.17.21",
     "marked": "^3.0.0",
     "nprogress": "^0.2.0",
+    "particles.vue3": "^1.20.5",
     "postcss": "^7",
     "prismjs": "^1.24.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
