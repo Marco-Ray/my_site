@@ -13,7 +13,7 @@
           <div class="pl-10">
             <div class="index"></div>
             <p class="text-red-500">Sep 2017 - Jul 2021</p>
-            <p class="text-red-500"><span class="text-xl text-white">Bachelor in Engineer</span> - University of Electronic Science and Technology of China</p>
+            <p class="text-red-500"><span class="text-xl text-white">Bachelor in Engineering</span> - University of Electronic Science and Technology of China</p>
           </div>
         </li>
         <li>
