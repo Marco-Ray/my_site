@@ -11,8 +11,7 @@
       <div class="dailySentence">
         <p id="hitokoto_text">
           {{ hitokoto }}
-          <br>
-          —— {{ author }}
+          <span :style="{'display': (hitokoto === 'Loading ...') ? 'none' : 'block'}"><br> —— {{ author }}</span>
         </p>
       </div>
     </section>
