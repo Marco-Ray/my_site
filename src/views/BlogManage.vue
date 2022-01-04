@@ -1,6 +1,6 @@
 <template>
   <section class="container mx-auto mt-20">
-    <router-link to="/">
+    <router-link to="/blogs">
       <i class="fa fa-times absolute text-white text-6xl top-0 right-0"></i>
     </router-link>
     <div class="md:grid md:grid-cols-3 md:gap-4">
