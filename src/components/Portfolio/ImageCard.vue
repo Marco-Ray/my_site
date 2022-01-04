@@ -10,6 +10,7 @@
         alt=""
         :src="img.url"
         @load="loadFinish = true"
+        draggable="false"
       />
       <img
         v-show="!loadFinish"

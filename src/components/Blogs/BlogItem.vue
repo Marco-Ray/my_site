@@ -12,7 +12,8 @@
     </div>
 
     <div class="mt-2">
-      <router-link :to="{ name: 'BlogPost', params: { id: blog.docID, url: blog.url } }" class="text-2xl font-bold text-gray-700 dark:text-white">
+      <router-link :to="{ name: 'BlogPost', params: { id: blog.docID, url: blog.url } }"
+                   class="text-2xl font-bold text-gray-700 dark:text-white" draggable="false">
         {{ blog.modified_name }}
       </router-link>
       <p class="mt-2 text-gray-600 dark:text-gray-300"

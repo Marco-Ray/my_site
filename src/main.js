@@ -1,4 +1,4 @@
-import { createApp } from 'vue';
+import { createApp, Vue } from 'vue';
 import App from './App.vue';
 import router from './router';
 import store from './store';
@@ -11,7 +11,7 @@ import ProgressBar from './includes/progress-bar';
 import 'nprogress/nprogress.css';
 
 import VMdPreview from '@kangc/v-md-editor/lib/preview';
-import '@kangc/v-md-editor/lib/style/preview.css';
+// import '@kangc/v-md-editor/lib/style/preview.css';
 import vuepressTheme from '@kangc/v-md-editor/lib/theme/vuepress.js';
 import createMermaidPlugin from '@kangc/v-md-editor/lib/plugins/mermaid/cdn';
 import createLineNumbertPlugin from '@kangc/v-md-editor/lib/plugins/line-number/index';

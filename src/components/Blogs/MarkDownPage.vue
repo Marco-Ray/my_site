@@ -7,10 +7,11 @@ export default {
   name: 'MarkDownPage',
   data() {
     return {
-      temp: ''
+      temp: '',
+      url: this.$route.params.url,
     }
   },
-  props: ['url'],
+  // props: ['url'],
   methods: {
     transform() {
       this.axios.get(this.url).then((res) => {
