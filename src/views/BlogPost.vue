@@ -24,7 +24,7 @@ export default {
   data() {
     return {
       isTop: true,
-      url: this.$route.params.url,
+      url: this.$route.params.url || sessionStorage.getItem('blogUrl'),
     }
   },
   methods: {
@@ -41,6 +41,7 @@ export default {
   },
   created() {
     window.addEventListener('scroll', this.handleScroll);
+    sessionStorage.setItem('blogUrl', this.url)
   },
   beforeUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
