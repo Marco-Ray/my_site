@@ -9,6 +9,8 @@ import VeeValidatePlugin from './includes/validation';
 import { auth } from './includes/firebase';
 import ProgressBar from './includes/progress-bar';
 import 'nprogress/nprogress.css';
+import axios from 'axios';
+import VueAxios from 'vue-axios';
 
 import VMdPreview from '@kangc/v-md-editor/lib/preview';
 // import '@kangc/v-md-editor/lib/style/preview.css';
@@ -38,9 +40,6 @@ VMdPreview.use(createLineNumbertPlugin());
 VMdPreview.use(createCopyCodePlugin());
 // markdown支持emoji
 VMdPreview.use(createEmojiPlugin());
-
-import axios from 'axios';
-import VueAxios from 'vue-axios';
 
 ProgressBar(router);
 

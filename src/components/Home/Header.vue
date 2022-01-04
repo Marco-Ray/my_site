@@ -28,8 +28,9 @@
               </template>
             </div>
             <div id="logo"
-              class="text-white text-2xl font-bold
-              lg:text-3xl"
+                 class="text-white text-2xl font-bold
+                 lg:text-3xl"
+                 @click="goPage()"
             >
               Zehuan Wang
             </div>
@@ -129,9 +130,15 @@ export default {
         this.$router.push({ name: 'home' });
       }
     },
+    goPage() {
+      this.$router.push('/')
+    }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+#logo {
+  cursor: pointer;
+}
 </style>

@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import store from '@/store';
 
+import Welcome from '../views/Welcome';
 import Home from '../views/Home.vue';
 import About from '../views/About.vue';
 import Resume from '../views/Resume.vue';
@@ -14,6 +15,11 @@ import ImageManage from '../views/ImageManage.vue';
 const routes = [
   {
     path: '/',
+    name: 'Welcome',
+    component: Welcome,
+  },
+  {
+    path: '/home',
     name: 'Home',
     component: Home,
     meta: {
