@@ -9,7 +9,7 @@
         @click.prevent="backToTop"
       />
     </div>
-    <mark-down-page />
+    <mark-down-page :url="url" />
   </div>
 </template>
 
