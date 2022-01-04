@@ -9,7 +9,6 @@
         @click.prevent="backToTop"
       />
     </div>
-<!--    <mark-down-page :url="url"></mark-down-page>-->
     <mark-down-page />
   </div>
 </template>
@@ -54,8 +53,6 @@ export default {
         vm.$router.push({ name: 'Blogs' });
       }
     });
-
-    console.log(this.url)
   }
 };
 </script>
