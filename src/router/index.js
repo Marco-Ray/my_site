@@ -17,6 +17,10 @@ const routes = [
     path: '/',
     name: 'Welcome',
     component: Welcome,
+    meta: {
+      enter: 'animate__animated animate__fadeIn ',
+      leave: 'animate__animated animate__fadeOut',
+    },
   },
   {
     path: '/home',
