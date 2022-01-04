@@ -2,8 +2,6 @@
   <div class="portfolio bg-black h-full min-h-screen flex flex-col items-center">
     <Particles
       id="tsparticles"
-      :particlesInit="particlesInit"
-      :particlesLoaded="particlesLoaded"
       :options="{
         fullScreen: {
           zIndex: 0
@@ -125,6 +123,10 @@
       />
     </transition-group>
 
+    <div v-show="noMore" class="noMore-hint mb-20">
+      no more photos ...
+    </div>
+
     <div id="btt" class="fixed w-full bottom-5 z-10 cursor-pointer text-white text-6xl flex justify-center">
       <i v-show="pendingRequest"
         class="fa fa-spinner fa-spin"
@@ -156,6 +158,7 @@ export default {
       isTop: true,
       maxPerPage: 9,
       pendingRequest: false,
+      noMore: false,
     }
   },
   computed: {
@@ -175,10 +178,16 @@ export default {
     toggleAlbum(val) {
       this.imgs = []
       this.album = val;
+      this.pendingRequest = false;
+      this.noMore = false;
       this.getImages();
     },
 
     async getImages() {
+      if (this.noMore) {
+        return;
+      }
+
       if (this.pendingRequest) {
         return;
       }
@@ -212,6 +221,10 @@ export default {
       });
 
       this.pendingRequest = false;
+
+      if (snapshots.docs.length < this.maxPerPage) {
+        this.noMore = true;
+      }
     },
 
     handleScroll() {
@@ -244,6 +257,10 @@ export default {
 </script>
 
 <style scoped>
+.noMore-hint {
+
+  color: rgba(255, 255, 255, 0.5);
+}
 @media (max-width:959px){
   #btt {
     bottom: 0;

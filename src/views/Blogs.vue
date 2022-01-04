@@ -64,6 +64,10 @@
       />
     </transition-group>
 
+    <div v-show="noMore" class="noMore-hint mb-20">
+      no more blogs ...
+    </div>
+
     <div id="btt" class="fixed w-full bottom-5 z-10 cursor-pointer text-white text-6xl flex justify-center">
       <i v-show="pendingRequest"
          class="fa fa-spinner fa-spin"
@@ -95,6 +99,7 @@ export default {
       isTop: true,
       maxPerPage: 10,
       pendingRequest: false,
+      noMore: false,
     }
   },
   computed: {
@@ -117,6 +122,10 @@ export default {
   },
   methods: {
     async getFiles() {
+      if (this.noMore) {
+        return;
+      }
+
       if (this.pendingRequest) {
         return;
       }
@@ -148,6 +157,10 @@ export default {
       });
 
       this.pendingRequest = false;
+
+      if (snapshots.docs.length < this.maxPerPage) {
+        this.noMore = true;
+      }
 
       this.blogs_filtered = this.blogs;
     },
@@ -197,6 +210,10 @@ export default {
 </script>
 
 <style scoped>
+.noMore-hint {
+  color: rgba(255, 255, 255, 0.5);
+}
+
 @media (max-width:959px){
   #btt {
     bottom: 0;
