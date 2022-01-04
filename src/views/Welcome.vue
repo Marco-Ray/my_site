@@ -132,10 +132,17 @@ section {
   }
 
   .dailySentence {
+    width: 100%;
     position: absolute;
     bottom: -140%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: #fff;
     text-align: center;
+    filter: blur(0);
+    transform: scale(1);
+    transition: filter 0.5s, transform 0.5s;
   }
 
   // 触发景深效果
