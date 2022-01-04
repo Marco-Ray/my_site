@@ -1,7 +1,7 @@
 <template>
   <div class="about bg-black h-full min-h-screen flex flex-col items-center">
     <!-- Back Button-->
-    <router-link to="/">
+    <router-link to="/home">
       <i class="fa fa-times absolute text-white top-5 text-7xl right-5" />
     </router-link>
 
