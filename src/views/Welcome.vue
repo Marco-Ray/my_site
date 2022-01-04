@@ -9,7 +9,11 @@
         </router-link>
       </div>
       <div class="dailySentence">
-        <p id="hitokoto_text">Loading ...</p>
+        <p id="hitokoto_text">
+          {{ hitokoto }}
+          <br>
+          ———— {{ author }}
+        </p>
       </div>
     </section>
   </div>
@@ -18,6 +22,12 @@
 <script>
 export default {
   name: 'Welcome',
+  data() {
+    return {
+      hitokoto: 'Loading ...',
+      author: 'unknown'
+    }
+  },
   mounted() {
     this.getDailySentence()
   },
@@ -33,9 +43,8 @@ export default {
       //   .catch(console.error)
       this.axios.get('https://v1.hitokoto.cn?c=d&c=h&c=i&c=k')
         .then(({ data }) => {
-          const hitokoto = document.getElementById('hitokoto_text')
-          hitokoto.href = 'https://hitokoto.cn/?uuid=' + data.uuid
-          hitokoto.innerText = data.hitokoto
+          this.hitokoto = data.hitokoto
+          this.author = data.from_who
         })
         .catch(console.error)
     }
@@ -132,7 +141,7 @@ section {
   // 触发景深效果
   &:hover .dailySentence {
     filter: blur(2px);
-    transform: scale(0.99);
+    transform: scale(0.95);
     transition: filter 0.5s, transform 0.5s
   }
   // 取消景深效果
