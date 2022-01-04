@@ -12,7 +12,7 @@
         <p id="hitokoto_text">
           {{ hitokoto }}
           <br>
-          ———— {{ author }}
+          —— {{ author }}
         </p>
       </div>
     </section>
@@ -43,8 +43,8 @@ export default {
       //   .catch(console.error)
       this.axios.get('https://v1.hitokoto.cn?c=d&c=h&c=i&c=k')
         .then(({ data }) => {
-          this.hitokoto = data.hitokoto
-          this.author = data.from_who
+          this.hitokoto = data.hitokoto ? data.hitokoto : 'Loading ...'
+          this.author = data.from_who ? data.from_who : 'unknown'
         })
         .catch(console.error)
     }
