@@ -180,6 +180,7 @@ export default {
       this.album = val;
       this.pendingRequest = false;
       this.noMore = false;
+      this.sortByTime = '2';
       this.getImages();
     },
 
