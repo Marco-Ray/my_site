@@ -111,7 +111,7 @@
     </div>
 
     <!--    Image Container-->
-    <transition-group tag="ol" class="cards_container w-246 mb-20 flex flex-wrap justify-start" name="flip"
+    <transition-group tag="ol" class="cards_container w-82 lg:w-246 mb-20 flex flex-wrap justify-center" name="flip"
                       enter-active-class="animate__animated animate__zoomIn"
                       move-class="transition duration-1000 linear"
                       mode="out-in"
