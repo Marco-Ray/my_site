@@ -148,7 +148,7 @@
                      :key="blog.docID"
                      :data-index="index"
                      :blog="blog"
-                     class="my-5"
+                     class="my-5 z-50"
                      @filterByClick="filterByClick"
       />
     </transition-group>
