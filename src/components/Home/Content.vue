@@ -1,7 +1,6 @@
 <template>
   <div id="bg" class="px-20 flex flex-col justify-center gap-10 items-start">
     <Particles
-      v-if="hackReset"
       id="tsparticles"
       :options="{
         background: {
@@ -33,7 +32,7 @@
           startCount: 0,
           size: {
             mode: 'percent',
-            height: 0,
+            height: 100,
             width: 0
           },
           particles: {
@@ -63,7 +62,7 @@
             },
             rotate: {
               value: {
-                min: 0,
+                min: 1,
                 max: 360
               },
               animation: {
@@ -74,8 +73,8 @@
             }
           },
           position: {
-            x: -5,
-            y: pos_y
+            x: -30,
+            y: 50,
           }
         }
       }"
@@ -120,9 +119,9 @@ import { storage } from "@/includes/firebase";
 
 export default {
   name: 'Content',
-  created() {
-    this.timer = setInterval(this.PReset, this.interval*1000);
-  },
+  // created() {
+  //   this.timer = setInterval(this.PReset, this.interval*1000);
+  // },
   data() {
     return {
       CVURL: '',
@@ -137,14 +136,14 @@ export default {
       // window.location.href = this.CVURL;
       alert('Coming soon');
     },
-    PReset() {
-      this.pos_y = Math.floor(Math.random() * 100);
-      this.hackReset = false
-      this.$nextTick(() => {
-        this.hackReset = true
-      })
-
-    }
+    // PReset() {
+    //   this.pos_y = Math.floor(Math.random() * 100);
+    //   this.hackReset = false
+    //   this.$nextTick(() => {
+    //     this.hackReset = true
+    //   })
+    //
+    // }
     // async getCVURL() {
     //   const storageRef = storage.ref();
     //   storageRef.child('CV/CV-Zehuan_Wang-20210923.doc').getDownloadURL()
@@ -156,9 +155,9 @@ export default {
     //     });
     // }
   },
-  beforeUnmount() {
-    clearInterval(this.timer);
-  }
+  // beforeUnmount() {
+  //   clearInterval(this.timer);
+  // }
 };
 </script>
 
