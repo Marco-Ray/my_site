@@ -50,7 +50,7 @@ export default {
     async signout({ commit }, payload) {
       await auth.signOut();
       commit('toggleAuth');
-      payload.router.push({ name: 'home' });
+      payload.router.push({ name: 'Home' });
     },
   },
 };
