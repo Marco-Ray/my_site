@@ -1,8 +1,5 @@
 <template>
   <div class="blog h-screen text-red-600 text-6xl">
-    <router-link to="/blogs">
-      <i class="fa fa-times absolute top-5 right-5" />
-    </router-link>
     <div id="btt" class="fixed w-full bottom-5 right-5 z-10 cursor-pointer flex justify-end">
       <i v-show="!isTop"
         class="fa fa-arrow-up"
@@ -23,7 +20,7 @@ export default {
   data() {
     return {
       isTop: true,
-      url: this.$route.params.url || sessionStorage.getItem('blogUrl'),
+      url: 'https://firebasestorage.googleapis.com/v0/b/my-site-c1432.appspot.com/o/BlogFiles%2FWebsite%20Description.md?alt=media&token=e4032945-f799-4ad1-8b8f-9508538b6bc7' || sessionStorage.getItem('blogUrl'),
     }
   },
   methods: {

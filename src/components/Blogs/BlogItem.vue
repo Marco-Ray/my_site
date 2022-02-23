@@ -56,7 +56,8 @@ export default {
       this.$emit('filterByClick', this.blog.type);
     },
     readBlog() {
-      this.$router.push({ name: 'BlogPost', params: { id: this.blog.docID, url: this.blog.url } })
+      // this.$router.push({ name: 'BlogPost', params: { id: this.blog.docID, url: this.blog.url } })
+      window.open(this.blog.url, '_blank')
     }
   },
 };

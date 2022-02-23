@@ -51,10 +51,20 @@
           />
           <ErrorMessage name="compendium" class="text-red-600" />
         </div>
+        <div class="mb-3">
+          <label class="inline-block mb-2">URL</label>
+          <vee-field type="text" name="url"
+                     class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300
+                        transition duration-500 focus:outline-none focus:border-black rounded"
+                     placeholder="Edit URL"
+                     @input="updateUnsavedFlag(true)"
+          />
+          <ErrorMessage name="compendium" class="text-red-600" />
+        </div>
         <button type="submit" class="py-1.5 px-3 rounded text-white bg-green-600"
                 @disable="in_submission"
         >
-          Submit
+          Update
         </button>
         <button type="button" class="py-1.5 px-3 rounded text-white bg-gray-600"
                 @click.prevent="showForm = false" @disable="in_submission"
@@ -67,7 +77,7 @@
 </template>
 
 <script>
-import { filesCollection, storage } from '@/includes/firebase';
+import { filesCollection } from '@/includes/firebase';
 
 export default {
   name: 'compositionItem',
@@ -116,6 +126,7 @@ export default {
       try {
         await filesCollection.doc(this.file.docID).update(values);
       } catch (error) {
+        this.updateUnsavedFlag(false);
         this.in_submission = false;
         this.alert_variant = 'bg-red-500';
         this.alert_msg = 'Something went wrong! Try again later.';
@@ -136,9 +147,6 @@ export default {
     },
     async deleteFile() {
       this.icon_variant = 'fa fa-spinner fa-spin';
-      const storageRef = storage.ref();
-      const fileRef = storageRef.child(`BlogFiles/${this.file.original_name}`);
-      await fileRef.delete();
 
       await filesCollection.doc(this.file.docID).delete();
 

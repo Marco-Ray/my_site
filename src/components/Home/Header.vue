@@ -52,8 +52,8 @@
           lg:flex lg:px-24 lg:-mx-4 lg:gap-0 lg:pt-0 lg:flex-row lg:items-center lg:divide-none"
                :class="{ 'hidden': !isOpen, 'flex': isOpen}"
           >
+            <router-link to="/about" :class="navItemStyle">About</router-link>
             <router-link to="/resume" :class="navItemStyle">Resume</router-link>
-<!--            <router-link to="/about" :class="navItemStyle">About Me</router-link>-->
             <router-link to="/portfolio" :class="navItemStyle">Portfolio</router-link>
             <router-link to="/blogs" :class="navItemStyle">Blog</router-link>
 <!--            <router-link to="/contact" :class="navItemStyle">Contact</router-link>-->

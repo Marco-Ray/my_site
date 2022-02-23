@@ -2,68 +2,91 @@
   <div class="bg-white rounded border border-gray-200 relative flex flex-col">
     <div class="px-6 pt-6 pb-5 font-bold border-b border-gray-200">
       <span class="card-title">
-        Upload
+        Create New Blog
       </span>
       <i class="fa fa-upload float-right text-green-400 text-2xl"></i>
     </div>
     <div class="p-6">
-      <!-- Upload Dropbox -->
-      <div
-          class="w-full px-10 py-20 rounded text-center cursor-pointer border border-dashed
-                border-gray-400 text-gray-400 transition duration-500 hover:text-white
-                hover:bg-green-400 hover:border-green-400 hover:border-solid"
-        :class="{ 'bg-green-400 border-green-400 border-solid': is_dragover }"
-        @drag.prevent.stop=""
-        @dragstart.prevent.stop=""
-        @dragend.prevent.stop="is_dragover = false"
-        @dragover.prevent.stop="is_dragover = true"
-        @dragenter.prevent.stop="is_dragover = true"
-        @dragleave.prevent.stop="is_dragover = false"
-        @drop.prevent.stop="upload($event)"
-      >
-        <h5>DropBox</h5>
+      <!-- Create Box -->
+      <div>
+        <div class="text-white text-center font-bold p-4 mb-4"
+             v-if="show_alert" :class="alert_variant">
+          {{ alert_msg }}
+        </div>
+        <vee-form :validation-schema="schema"
+                  @submit="create"
+        >
+          <!-- Title-->
+          <div class="mb-3">
+            <label class="inline-block mb-2">Title</label>
+            <vee-field type="text" name="modified_name"
+                       class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300
+                        transition duration-500 focus:outline-none focus:border-black rounded"
+                       placeholder="Enter File Title"
+                       @input="updateUnfinishedFlag(true)"
+            />
+            <ErrorMessage name="modified_name" class="text-red-600" />
+          </div>
+          <!-- Type-->
+          <div class="mb-3">
+            <label class="inline-block mb-2">Type</label>
+            <vee-field type="text" name="type"
+                       class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300
+                        transition duration-500 focus:outline-none focus:border-black rounded"
+                       placeholder="Enter Type"
+                       @input="updateUnfinishedFlag(true)"
+            />
+            <ErrorMessage name="type" class="text-red-600" />
+          </div>
+          <!-- Compendium-->
+          <div class="mb-3">
+            <label class="inline-block mb-2">Compendium</label>
+            <vee-field type="text" name="compendium"
+                       class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300
+                        transition duration-500 focus:outline-none focus:border-black rounded"
+                       placeholder="Edit Compendium"
+                       @input="updateUnfinishedFlag(true)"
+            />
+            <ErrorMessage name="compendium" class="text-red-600" />
+          </div>
+          <!-- URL-->
+          <div class="mb-3">
+            <label class="inline-block mb-2">URL</label>
+            <vee-field type="text" name="url"
+                       class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300
+                        transition duration-500 focus:outline-none focus:border-black rounded"
+                       placeholder="Edit URL"
+                       @input="updateUnfinishedFlag(true)"
+            />
+            <ErrorMessage name="url" class="text-red-600" />
+          </div>
+          <button type="submit" class="py-1.5 px-3 rounded text-white bg-green-600"
+                  @disable="in_submission"
+          >
+            Submit
+          </button>
+        </vee-form>
       </div>
-      <input type="file" multiple @change="upload($event)" />
       <hr class="my-6" />
-      <!-- Clean Button-->
-      <button :disabled="upload_in_submission"
-              @click.prevent="cleanTasks"
-              class="block w-full border border-gray-300 text-white bg-blue-400 transition
-              hover:bg-blue-600 rounded"
-      >Clean</button>
-      <!-- Progess Bars -->
-      <div class="mb-4" v-for="upload in uploads" :key="upload.name">
-        <!-- File Name -->
-        <div class="font-bold text-sm" :class="upload.text_class">
-          <i :class="upload.icon"></i> {{ upload.name }}
-        </div>
-        <div class="flex h-4 overflow-hidden bg-gray-200 rounded">
-          <!-- Inner Progress Bar -->
-          <div class="transition-all progress-bar"
-               :class="upload.variant"
-               :style="{ width: upload.current_progress + '%' }"
-          ></div>
-        </div>
-      </div>
-      <div class="text-red-400 text-center font-bold mb-4 bg-red-500"
-           v-if="upload_show_alert">
-        upload failure
-      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { storage, auth, filesCollection } from '@/includes/firebase';
+import { auth, filesCollection } from '@/includes/firebase';
 
 export default {
   name: 'Upload',
   data() {
     return {
-      is_dragover: false,
-      uploads: [],
-      upload_show_alert: false,
-      tasksUploading: 0,
+      schema: {
+        url: 'required',
+      },
+      in_submission: false,
+      show_alert: false,
+      alert_variant: 'bg-blue-500',
+      alert_msg: 'Please wait! Updating blog info.',
+      icon_variant: 'fa fa-times',
     };
   },
   props: {
@@ -73,90 +96,44 @@ export default {
     },
     updateUnfinishedFlag: {
       type: Function,
-    },
-  },
-  computed: {
-    upload_in_submission() {
-      this.updateUnfinishedFlag(this.tasksUploading !== 0);
-      return (this.tasksUploading !== 0);
-    },
+    }
   },
   methods: {
-    upload($event) {
-      this.is_dragover = false;
+    async create(values) {
+      this.in_submission = true;
+      this.show_alert = true;
+      this.alert_variant = 'bg-blue-500';
+      this.alert_msg = 'Please wait! Updating file info.';
 
-      const files = $event.dataTransfer
-        ? [...$event.dataTransfer.files]
-        : [...$event.target.files];
+      const post = {
+        uid: auth.currentUser.uid,
+        modified_name: values.modified_name,
+        datePosted: new Date().toString(),
+        type: values.type,
+        compendium: values.compendium,
+        url: values.url
+      };
 
-      this.tasksUploading = files.length;
+      try {
+        await filesCollection.add(post);
+      } catch (error) {
+        this.updateUnfinishedFlag(false);
+        this.in_submission = false;
+        this.alert_variant = 'bg-red-500';
+        this.alert_msg = 'Something went wrong! Try again later.';
+        return;
+      }
 
-      files.forEach((file) => {
+      this.updateUnfinishedFlag(false);
+      this.in_submission = false;
+      this.alert_variant = 'bg-green-500';
+      this.alert_msg = 'Success!';
 
-        if (!navigator.onLine) {
-          this.uploads.push({
-            task: {},
-            current_progress: 100,
-            name: file.name,
-            variant: 'bg-red-400',
-            icon: 'fa fa-times',
-            text_class: 'text-red-400',
-          });
-          this.tasksUploading = 0;
-          return;
-        }
+      setTimeout(() => {
+        this.show_alert = false;
+      }, 2000);
 
-        const storageRef = storage.ref(); // music-4aefa.appspot.com
-        const postsRef = storageRef.child(`BlogFiles/${file.name}`);
-        const task = postsRef.put(file);
-
-        const uploadIndex = this.uploads.push({
-          task,
-          current_progress: 0,
-          name: file.name,
-          variant: 'bg-blue-400',
-          icon: 'fa fa-spinner fa-spin',
-          text_class: '',
-        }) - 1;
-
-        task.on('state_changed', (snapshot) => {
-          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          this.uploads[uploadIndex].current_progress = progress;
-        }, () => {
-          this.uploads[uploadIndex].variant = 'bg-red-400';
-          this.uploads[uploadIndex].icon = 'fa fa-times';
-          this.uploads[uploadIndex].text_class = 'text-red-400';
-
-          this.upload_show_alert = true;
-        }, async () => {
-          const post = {
-            uid: auth.currentUser.uid,
-            original_name: task.snapshot.ref.name,
-            modified_name: task.snapshot.ref.name,
-            datePosted: new Date().toString(),
-            type: '',
-            compendium: 'This is one of my Blog Post',
-          };
-
-          post.url = await task.snapshot.ref.getDownloadURL();
-          await filesCollection.add(post);
-          this.getFiles();
-
-          this.uploads[uploadIndex].variant = 'bg-green-400';
-          this.uploads[uploadIndex].icon = 'fa fa-check';
-          this.uploads[uploadIndex].text_class = 'text-green-400';
-
-          this.tasksUploading -= 1;
-        });
-      });
-    },
-    // cancelUploads() {
-    //   this.uploads.forEach((upload) => {
-    //     upload.task.cancel();
-    //   });
-    // },
-    cleanTasks() {
-      this.uploads = [];
+      this.getFiles();
     },
   },
   // beforeUnmount() {

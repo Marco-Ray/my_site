@@ -6,20 +6,20 @@
     </router-link>
 
     <h1 class="text-white my-14 py-6 px-28 lg:px-40 text-5xl border-b-2 border-red-500">
-      About Me
+      About
     </h1>
 
-    <app-to-be-continue />
+    <blog-post />
   </div>
 </template>
 
 <script>
-import AppToBeContinue from '@/components/ToBeContinue.vue';
+import BlogPost from "@/views/BlogPost";
 
 export default {
   name: 'About',
   components: {
-    AppToBeContinue,
+    BlogPost
   }
 }
 </script>
