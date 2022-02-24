@@ -8,9 +8,24 @@ import Resume from '../views/Resume.vue';
 import Portfolio from '../views/Portfolio.vue';
 import BlogPost from '../views/BlogPost.vue';
 import Blogs from '../views/Blogs';
-import Contact from '../views/Contact.vue';
+import Kits from '../views/Kits';
+// import Contact from '../views/Contact.vue';
 import BlogManage from '../views/BlogManage.vue';
 import ImageManage from '../views/ImageManage.vue';
+
+
+// // 路由自动化注册
+// const modules = require.context('@/components/Kits', true, /index.vue$/);
+// const autoRoutes = modules.keys().map((item) => {
+//   const KitName = item.slice(2);
+//   const path = '/' + item.slice(1).replace('.vue', '').replace('index', '').replace('/', '').replace('/', '');
+//   const KitModule = () => import(`../components/Kits/${KitName}`);
+//   return {
+//     path,
+//     component: KitModule,
+//   };
+// });
+
 
 const routes = [
   {
@@ -102,6 +117,18 @@ const routes = [
       leave: 'animate__animated animate__fadeOut',
     },
   },
+  {
+    path: '/kits',
+    name: 'Kits',
+    component: Kits,
+    meta: {
+      enter: 'animate__animated animate__fadeIn ',
+      leave: 'animate__animated animate__fadeOut',
+    },
+    // children: [
+    //   ...autoRoutes
+    // ]
+  },
   // {
   //   path: '/contact',
   //   name: 'Contact',
@@ -117,6 +144,9 @@ const routes = [
     redirect: { name: 'Home' },
   },
 ];
+
+console.log(routes,"查看路由表内容")
+
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),

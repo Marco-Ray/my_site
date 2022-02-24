@@ -56,6 +56,7 @@
             <router-link to="/resume" :class="navItemStyle">Resume</router-link>
             <router-link to="/portfolio" :class="navItemStyle">Portfolio</router-link>
             <router-link to="/blogs" :class="navItemStyle">Blog</router-link>
+            <router-link to="/kits" :class="navItemStyle">Kits</router-link>
 <!--            <router-link to="/contact" :class="navItemStyle">Contact</router-link>-->
 
           </div>

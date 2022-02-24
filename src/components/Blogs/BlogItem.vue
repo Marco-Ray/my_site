@@ -40,7 +40,7 @@ export default {
   data() {
     return {
       readMore: false,
-      readMoreText: 'Read More',
+      readMoreText: 'Read the whole compendium',
     };
   },
   methods: {
@@ -49,7 +49,7 @@ export default {
       if (this.readMore) {
         this.readMoreText = 'Hidden'
       } else {
-        this.readMoreText = 'Read More'
+        this.readMoreText = 'Read the whole compendium'
       }
     },
     filterByClick() {
