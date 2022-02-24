@@ -8,23 +8,24 @@ import Resume from '../views/Resume.vue';
 import Portfolio from '../views/Portfolio.vue';
 import BlogPost from '../views/BlogPost.vue';
 import Blogs from '../views/Blogs';
-import Kits from '../views/Kits';
+import Kits from '../views/Kits/index';
 // import Contact from '../views/Contact.vue';
 import BlogManage from '../views/BlogManage.vue';
 import ImageManage from '../views/ImageManage.vue';
 
 
-// // 路由自动化注册
-// const modules = require.context('@/components/Kits', true, /index.vue$/);
-// const autoRoutes = modules.keys().map((item) => {
-//   const KitName = item.slice(2);
-//   const path = '/' + item.slice(1).replace('.vue', '').replace('index', '').replace('/', '').replace('/', '');
-//   const KitModule = () => import(`../components/Kits/${KitName}`);
-//   return {
-//     path,
-//     component: KitModule,
-//   };
-// });
+// 路由自动化注册
+const modules = require.context('@/components/Kits/modules', true, /index.vue$/);
+const autoRoutes = modules.keys().map((item) => {
+  const cmpName = item.slice(2);
+  const KitName = item.slice(1).replace('.vue', '').replace('index', '').replace('/', '').replace('/', '');
+  const KitModule = () => import(`@/components/Kits/modules/${cmpName}`);
+  return {
+    path: KitName,
+    name: KitName,
+    component: KitModule,
+  };
+});
 
 
 const routes = [
@@ -125,9 +126,9 @@ const routes = [
       enter: 'animate__animated animate__fadeIn ',
       leave: 'animate__animated animate__fadeOut',
     },
-    // children: [
-    //   ...autoRoutes
-    // ]
+    children: [
+      ...autoRoutes
+    ]
   },
   // {
   //   path: '/contact',
@@ -146,7 +147,6 @@ const routes = [
 ];
 
 console.log(routes,"查看路由表内容")
-
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
