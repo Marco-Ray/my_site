@@ -9,18 +9,20 @@
       Kits
     </h1>
 
-    <div class="w-10/12 flex flex-row">
-<!--      左半-->
-      <div class="cards_container w-1/2 mb-20 flex flex-wrap justify-center">
+    <div class="w-10/12 flex flex-col justify-center">
+      <div v-if="showKit" class="kit-window w-full flex flex-col">
+        <router-view></router-view>
+        <i class="undo-icon fa fa-undo text-white text-center text-7xl cursor-pointer" @click="showKit = false"></i>
+      </div>
+
+      <div v-else class="cards_container w-full mb-20 flex flex-wrap justify-center">
         <cmp-card
           v-for="cmp in cmps"
           :key="cmp"
           :cmp="cmp"
+          @click="openKit(cmp)"
         />
       </div>
-
-<!--      右半-->
-      <router-view class="w-1/2"></router-view>
     </div>
 
   </div>
@@ -37,7 +39,14 @@ export default {
   },
   data() {
     return {
+      showKit: false,
       cmps: cmps,
+    }
+  },
+  methods: {
+    openKit(cmp) {
+      this.$router.push({ name: cmp })
+      this.showKit = true;
     }
   }
 }
@@ -46,5 +55,13 @@ export default {
 <style lang="scss" scoped>
 .cmp-card {
   color: white;
+}
+
+.kit-window {
+  height: calc(100vh - 50px);
+}
+
+.undo-icon {
+  margin: 20px 0;
 }
 </style>

@@ -146,8 +146,6 @@ const routes = [
   },
 ];
 
-console.log(routes,"查看路由表内容")
-
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,

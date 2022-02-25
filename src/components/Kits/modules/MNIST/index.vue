@@ -96,7 +96,7 @@ export default {
   methods: {
     MNISTKit() {
       const CANVAS_SIZE = 280;
-      const CANVAS_SCALE = 0.5;
+      const CANVAS_SCALE = 1;
 
       const canvas = document.getElementById("canvas");
       const ctx = canvas.getContext("2d");
@@ -239,8 +239,9 @@ export default {
 
 .canvas {
   border-radius: 4px;
-  height: 140px;
-  width: 140px;
+  height: 280px;
+  width: 280px;
+  cursor: pointer;
 }
 
 .button {
@@ -251,13 +252,13 @@ export default {
   cursor: pointer;
   font-size: 14px;
   font-weight: 500;
-  letter-spacing: 1.25px;
+  letter-spacing: 2.5px;
   line-height: 36px;
   margin: 16px 0;
   text-align: center;
   transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   user-select: none;
-  width: 140px;
+  width: 280px;
 }
 
 .button:hover {
@@ -275,13 +276,13 @@ export default {
 }
 
 .prediction-col {
-  padding: 0 2px;
+  padding: 0 4px;
 }
 
 .prediction-bar-container {
   background: #f5f5f5;
   height: 140px;
-  width: 10px;
+  width: 20px;
   position: relative;
 }
 
@@ -294,7 +295,7 @@ export default {
 
 .prediction-number {
   color: #bdbdbd;
-  font-size: 14px;
+  font-size: 28px;
   text-align: center;
 }
 
