@@ -1,5 +1,5 @@
 <template>
-  <div class="about bg-black min-h-screen flex flex-col items-center">
+  <div id="kit" class="about bg-black min-h-screen flex flex-col items-center">
     <!-- Back Button-->
     <router-link to="/home">
       <i class="fa fa-times absolute text-white top-5 text-7xl right-5" />
@@ -47,6 +47,13 @@ export default {
     openKit(cmp) {
       this.$router.push({ name: cmp })
       this.showKit = true;
+      console.log(document.documentElement.scrollHeight);
+      this.$nextTick(() => {
+        window.scrollTo({
+          top: document.documentElement.scrollHeight,
+          behavior: "smooth"
+        });
+      })
     }
   }
 }
