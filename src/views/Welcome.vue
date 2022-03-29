@@ -32,15 +32,7 @@ export default {
   },
   methods: {
     getDailySentence() {
-      // fetch('https://v1.hitokoto.cn')
-      //   .then(response => response.json())
-      //   .then(data => {
-      //     const hitokoto = document.getElementById('hitokoto_text')
-      //     hitokoto.href = 'https://hitokoto.cn/?uuid=' + data.uuid
-      //     hitokoto.innerText = data.hitokoto
-      //   })
-      //   .catch(console.error)
-      this.axios.get('https://v1.hitokoto.cn?c=d&c=h&c=i&c=k')
+      this.axios.get('https://v1.hitokoto.cn?c=d&c=i&c=k')
         .then(({ data }) => {
           this.hitokoto = data.hitokoto ? data.hitokoto : 'Loading ...'
           this.author = data.from_who ? data.from_who : 'unknown'
