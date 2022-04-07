@@ -111,6 +111,14 @@
     <transition class="animate__animated animate__fadeInUp animate__delay-1s">
       <button class="px-5 py-2 bg-red-500 text-white rounded-sm" @click="downloadCV">Download CV</button>
     </transition>
+    <transition class="animate__animated animate__fadeIn animate__delay_2s">
+      <div v-if="exchange" id="exchange" class="text-xl text-white text-right hidden lg:block">
+        <p>The currency value for GBP to CNY: </p>
+        <p class="text-red-500">
+          {{ exchange.cny }}
+        </p>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -128,14 +136,25 @@ export default {
       timer: '',
       pos_y: 25,
       hackReset: true,
-      interval: 16
+      interval: 16,
+      exchange: null
     }
+  },
+  created() {
+    this.getExchange()
   },
   methods: {
     downloadCV() {
       // window.location.href = this.CVURL;
       alert('Coming soon');
     },
+    getExchange() {
+      this.axios.get('https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/gbp/cny.json')
+        .then((res) => {
+          console.log(res.data)
+          this.exchange = res.data
+        })
+    }
     // PReset() {
     //   this.pos_y = Math.floor(Math.random() * 100);
     //   this.hackReset = false
@@ -166,5 +185,11 @@ export default {
   width: 100%;
   height: 100vh;
   --animate-duration: 1.2s;
+}
+
+#exchange {
+  position: absolute;
+  bottom: 50px;
+  right: 100px;
 }
 </style>

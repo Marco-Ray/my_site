@@ -1,6 +1,6 @@
 <template>
   <transition class="animate__animated animate__fadeIn">
-    <nav id="nav" class="bg-black relative lg:fixed w-full shadow-lg lg:bg-transparent">
+    <nav id="nav" class="bg-black relative lg:fixed w-screen shadow-lg lg:bg-transparent">
     <div class="container pt-8 pb-2 mx-auto lg:flex lg:px-20 lg:justify-between lg:items-center">
         <div class="lg:flex lg:items-center">
           <div class="flex items-center justify-between">
