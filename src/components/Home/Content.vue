@@ -111,7 +111,7 @@
     <transition class="animate__animated animate__fadeInUp animate__delay-1s">
       <button class="px-5 py-2 bg-red-500 text-white rounded-sm" @click="downloadCV">Download CV</button>
     </transition>
-    <transition class="animate__animated animate__fadeIn animate__delay_2s">
+    <transition class="animate__animated animate__fadeInUp animate__delay-1s">
       <div v-if="exchange" id="exchange" class="text-xl text-white text-right hidden lg:block">
         <p>The currency value for GBP to CNY: </p>
         <p class="text-red-500">
